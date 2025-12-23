@@ -91,7 +91,8 @@
     </section>
 
     <!-- 3. COMMODITY SECTION -->
-    <section class="py-24 bg-white">
+    <!-- Added ID for anchor link reference -->
+    <section id="commodity-section" class="py-24 bg-white">
         <div class="container mx-auto px-6">
             <div class="mb-12 section-anim">
                 <h2 class="text-4xl font-bold text-mind-blue mb-4"><?= lang('Home.commodity_heading') ?></h2>
@@ -99,7 +100,10 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="group relative aspect-[3/4] overflow-hidden rounded-lg cursor-pointer shadow-md">
+                
+                <!-- Alumunium -->
+                <!-- FIX: Added href to commodity detail -->
+                <a href="<?= site_url($locale . '/komoditas/alumunium') ?>" class="group relative aspect-[3/4] overflow-hidden rounded-lg cursor-pointer shadow-md block">
                     <img src="<?= base_url('img/Alumunium.png') ?>"
                         class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     <div
@@ -116,8 +120,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="group relative aspect-[3/4] overflow-hidden rounded-lg cursor-pointer shadow-md">
+                </a>
+
+                <!-- Batu Bara -->
+                <a href="<?= site_url($locale . '/komoditas/batu-bara') ?>" class="group relative aspect-[3/4] overflow-hidden rounded-lg cursor-pointer shadow-md block">
                     <img src="<?= base_url('img/Batu-bara.png') ?>"
                         class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     <div
@@ -134,8 +140,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="group relative aspect-[3/4] overflow-hidden rounded-lg cursor-pointer shadow-md">
+                </a>
+
+                <!-- Emas -->
+                <a href="<?= site_url($locale . '/komoditas/emas') ?>" class="group relative aspect-[3/4] overflow-hidden rounded-lg cursor-pointer shadow-md block">
                     <img src="<?= base_url('img/Emas.png') ?>"
                         class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     <div
@@ -152,8 +160,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="group relative aspect-[3/4] overflow-hidden rounded-lg cursor-pointer shadow-md">
+                </a>
+
+                <!-- Nikel -->
+                <a href="<?= site_url($locale . '/komoditas/nikel') ?>" class="group relative aspect-[3/4] overflow-hidden rounded-lg cursor-pointer shadow-md block">
                     <img src="<?= base_url('img/Nikel.png') ?>"
                         class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     <div
@@ -170,7 +180,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </a>
+
             </div>
         </div>
     </section>
@@ -184,133 +195,66 @@
             </div>
 
             <div class="grid md:grid-cols-3 gap-8">
-                <div
-                    class="bg-white rounded-xl shadow-sm hover:shadow-xl transition-shadow overflow-hidden group h-full flex flex-col">
-                    <div class="h-56 overflow-hidden">
-                        <img src="<?= base_url('img/foto-berita-mindID.png') ?>"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <div class="p-8 flex-1 flex flex-col">
-                        <span class="text-xs text-gray-500 font-bold uppercase tracking-wider mb-2"><?= lang('Home.news1_date') ?></span>
-                        <h3 class="text-xl font-bold text-mind-blue mb-4 line-clamp-3"><?= lang('Home.news1_title') ?></h3>
-                        <div class="mt-auto">
-                            <a href="#"
-                                class="text-mind-red font-bold text-sm uppercase tracking-wide group-hover:text-red-700"><?= lang('Home.news_cta') ?></a>
+                <?php foreach ($news as $article) : ?>
+                    <div class="bg-white rounded-xl shadow-sm hover:shadow-xl transition-shadow overflow-hidden group h-full flex flex-col">
+                        <div class="h-56 overflow-hidden">
+                            <img src="<?= esc($article['image']) ?>" alt="<?= esc($article['title']) ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="p-8 flex-1 flex flex-col">
+                            <span class="text-xs text-gray-500 font-bold uppercase tracking-wider mb-2"><?= esc($article['date']) ?></span>
+                            <h3 class="text-xl font-bold text-mind-blue mb-4 line-clamp-3"><?= esc($article['title']) ?></h3>
+                            <div class="mt-auto">
+                                <a href="<?= site_url($locale . '/berita/' . $article['slug']) ?>" class="text-mind-red font-bold text-sm uppercase tracking-wide group-hover:text-red-700"><?= lang('Home.news_cta') ?></a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div
-                    class="bg-white rounded-xl shadow-sm hover:shadow-xl transition-shadow overflow-hidden group h-full flex flex-col">
-                    <div class="h-56 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1932&auto=format&fit=crop"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <div class="p-8 flex-1 flex flex-col">
-                        <span class="text-xs text-gray-500 font-bold uppercase tracking-wider mb-2"><?= lang('Home.news2_date') ?></span>
-                        <h3 class="text-xl font-bold text-mind-blue mb-4 line-clamp-3"><?= lang('Home.news2_title') ?></h3>
-                        <div class="mt-auto">
-                            <a href="#"
-                                class="text-mind-red font-bold text-sm uppercase tracking-wide group-hover:text-red-700"><?= lang('Home.news_cta') ?></a>
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="bg-white rounded-xl shadow-sm hover:shadow-xl transition-shadow overflow-hidden group h-full flex flex-col">
-                    <div class="h-56 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070&auto=format&fit=crop"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <div class="p-8 flex-1 flex flex-col">
-                        <span class="text-xs text-gray-500 font-bold uppercase tracking-wider mb-2"><?= lang('Home.news3_date') ?></span>
-                        <h3 class="text-xl font-bold text-mind-blue mb-4 line-clamp-3"><?= lang('Home.news3_title') ?></h3>
-                        <div class="mt-auto">
-                            <a href="#"
-                                class="text-mind-red font-bold text-sm uppercase tracking-wide group-hover:text-red-700"><?= lang('Home.news_cta') ?></a>
-                        </div>
-                    </div>
-                </div>
+                <?php endforeach; ?>
             </div>
         </div>
     </section>
 
-    <!-- 7. MEMBERS -->
-    <section class="py-20 md:py-28 bg-gray-100 section-fade-in overflow-hidden">
-        <div class="container mx-auto px-6 mb-16">
-            <div class="grid md:grid-cols-3 gap-8 items-end">
-                <div class="md:col-span-1">
-                    <h2 class="text-4xl font-bold text-mind-blue"><?= lang('Home.members_heading') ?></h2>
-                </div>
-                <div class="md:col-span-2">
-                    <p class="text-text-secondary"><?= lang('Home.members_text') ?></p>
-                </div>
+    <!-- 7. MEMBERS (Re-inserted from your latest code) -->
+    <section class="py-20 bg-gray-50 section-fade-in relative">
+        <!-- Decorative Background Element -->
+        <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+
+        <div class="container mx-auto px-6">
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-mind-blue mb-6"><?= lang('Home.members_heading') ?></h2>
+                <p class="text-text-secondary text-lg leading-relaxed">
+                    <?= lang('Home.members_text') ?>
+                </p>
+                <div class="mt-6 w-24 h-1 bg-mind-red mx-auto rounded-full"></div>
             </div>
-        </div>
-        <div class="relative">
-            <div class="swiper members-slider">
-                <div class="swiper-wrapper">
-                    <!-- 1. PT. Pasifik Resources Indonesia -->
-                    <div class="swiper-slide flex justify-center items-center">
-                        <div
-                            class="w-36 h-36 bg-white rounded-full shadow-lg flex items-center justify-center overflow-hidden">
-                            <img src="<?= base_url('img/foto-member1.png') ?>" alt="PT. Pasifik Resources Indonesia"
-                                class="w-full h-full object-contain">
-                        </div>
+
+            <!-- FLEX LAYOUT: CENTERED & WRAPPED -->
+            <div class="flex flex-wrap justify-center -mx-4">
+                <?php foreach ($members as $member) : ?>
+                    <!-- ITEM WRAPPER -->
+                    <div class="w-1/2 md:w-1/3 lg:w-1/4 px-4 mb-8 md:mb-12 flex justify-center">
+                        <!-- Circle Card -->
+                        <a href="#" class="group relative block w-32 h-32 sm:w-40 sm:h-40 md:w-44 md:h-44 bg-white rounded-full shadow-lg border-4 border-white hover:border-white transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl flex items-center justify-center overflow-hidden shrink-0">
+                            <!-- Hover Ring Effect -->
+                            <div class="absolute inset-0 rounded-full border-4 border-transparent group-hover:border-mind-blue/10 transition-colors duration-300"></div>
+                            <!-- Logo Container -->
+                            <div class="w-3/4 h-3/4 flex items-center justify-center relative z-10 p-2">
+                                <?php if (!empty($member['logo'])) : ?>
+                                    <img src="<?= base_url('img/' . $member['logo']) ?>" 
+                                         alt="<?= $member['name'] ?>" 
+                                         class="w-full h-full object-contain filter grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110">
+                                <?php else : ?>
+                                    <div class="text-center text-xs sm:text-sm font-bold text-gray-400 group-hover:text-mind-blue transition-colors leading-tight px-2">
+                                        <?= $member['name'] ?>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        </a>
                     </div>
-                    <!-- 2. PT. Batu Energi Timur -->
-                    <div class="swiper-slide flex justify-center items-center">
-                        <div
-                            class="w-36 h-36 bg-white rounded-full flex items-center justify-center text-center p-2 text-sm font-semibold text-mind-blue shadow-lg">
-                            PT. Batu Energi Timur
-                        </div>
-                    </div>
-                    <!-- 3. PT Batu Halmahera Mineral -->
-                    <div class="swiper-slide flex justify-center items-center">
-                        <div
-                            class="w-36 h-36 bg-white rounded-full shadow-lg flex items-center justify-center overflow-hidden">
-                            <img src="<?= base_url('img/foto-member3.png') ?>" alt="PT Batu Halmahera Mineral"
-                                class="w-full h-full object-contain">
-                        </div>
-                    </div>
-                    <!-- 4. PT Batu Resources Semesta -->
-                    <div class="swiper-slide flex justify-center items-center">
-                        <div
-                            class="w-36 h-36 bg-white rounded-full flex items-center justify-center text-center p-2 text-sm font-semibold text-mind-blue shadow-lg">
-                            PT Batu Resources Semesta
-                        </div>
-                    </div>
-                    <!-- 5. PT. Batu Investment Indonesia -->
-                    <div class="swiper-slide flex justify-center items-center">
-                        <div
-                            class="w-36 h-36 bg-white rounded-full shadow-lg flex items-center justify-center overflow-hidden">
-                            <img src="<?= base_url('img/foto-member5.png') ?>" alt="PT. Batu Investment Indonesia"
-                                class="w-full h-full object-contain">
-                        </div>
-                    </div>
-                    <!-- 6. PT.Batulak King Properti -->
-                    <div class="swiper-slide flex justify-center items-center">
-                        <div
-                            class="w-36 h-36 bg-white rounded-full shadow-lg flex items-center justify-center overflow-hidden">
-                            <img src="<?= base_url('img/foto-member6.png') ?>" alt="PT.Batulak King Properti"
-                                class="w-full h-full object-contain">
-                        </div>
-                    </div>
-                    <!-- 7. PT. Batu Trans Logistik -->
-                    <div class="swiper-slide flex justify-center items-center">
-                        <div
-                            class="w-36 h-36 bg-white rounded-full flex items-center justify-center text-center p-2 text-sm font-semibold text-mind-blue shadow-lg">
-                            PT. Batu Trans Logistik
-                        </div>
-                    </div>
-                </div>
+                <?php endforeach; ?>
             </div>
-            <div class="members-prev absolute top-1/2 -translate-y-1/2 left-4 z-10 cursor-pointer members-nav"><i
-                    class="ph-bold ph-caret-left text-2xl"></i></div>
-            <div class="members-next absolute top-1/2 -translate-y-1/2 right-4 z-10 cursor-pointer members-nav"><i
-                    class="ph-bold ph-caret-right text-2xl"></i></div>
         </div>
     </section>
-
-
 
 </main>
 

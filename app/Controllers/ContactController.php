@@ -25,16 +25,14 @@ class ContactController extends BaseController
             'jam_operasional' => 'Senin - Jumat: 09:00 - 17:00',
         ];
 
+        $locale = service('request')->getLocale();
+
         // Mengumpulkan semua data untuk view
         $data = [
-            'pre_title' => 'Terhubung',
-            'hero_title' => 'Hubungi Kami',
-            'hero_subtitle' => 'Kami siap membantu menjawab pertanyaan Anda dan mendengarkan masukan berharga dari Anda.',
+            'locale' => $locale,
             'page_title' => 'Kontak',
-            'hero_image_url' => base_url('img/foto-hero-section-1.jpg'),
             'activeMenu' => 'contact',
             'lang'       => $this->lang ?? 'id',
-            'hero_image' => 'foto-hero-section-1.jpg', // Original for the content below hero
             'canonical'  => base_url(($this->lang ?? 'id') . '/' . (($this->lang ?? 'id') === 'id' ? 'kontak' : 'contact')),
             'meta'       => $static_meta,
             'info'       => $kontak_info,

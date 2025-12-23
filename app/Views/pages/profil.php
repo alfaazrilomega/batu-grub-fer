@@ -164,47 +164,9 @@
         </div>
     </section>
 
-    <!-- IMPACT SECTION -->
-    <section class="py-24 bg-gray-50">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col lg:flex-row gap-16 items-center">
-                <div class="lg:w-1/2 order-2 lg:order-1 fade-up">
-                    <div class="relative rounded-2xl overflow-hidden shadow-2xl group">
-                        <div class="aspect-video bg-gray-300 w-full object-cover relative">
-                             <img src="/img/foto-profile-perusahaan.png" alt="Masa Depan Desa" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
-                        </div>
-                        <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/90 via-black/50 to-transparent p-8">
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="lg:w-1/2 order-1 lg:order-2 fade-up">
-                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Masa Depan Berkelanjutan</h2>
-                    <div class="prose text-gray-600 leading-relaxed text-lg text-justify">
-                        <p class="mb-4">
-                            Keberlanjutan bukan hanya tentang lingkungan, tetapi juga ekonomi dan sosial. GESID berkomitmen untuk memastikan dampak jangka panjang.
-                        </p>
-                        <p class="mb-4">
-                            Kami mengajak seluruh elemen masyarakat untuk berkolaborasi. Seperti halnya mengelola sumber daya untuk kemakmuran, GESID mengelola potensi manusia untuk peradaban.
-                        </p>
-                        <ul class="space-y-3 mt-6">
-                            <li class="flex items-center gap-3">
-                                <i class="bi bi-check-circle-fill text-yellow-500 text-xl"></i>
-                                <span class="font-medium">Kolaborasi Multi-Sektor</span>
-                            </li>
-                            <li class="flex items-center gap-3">
-                                <i class="bi bi-check-circle-fill text-yellow-500 text-xl"></i>
-                                <span class="font-medium">Pemberdayaan Berbasis Data</span>
-                            </li>
-                            <li class="flex items-center gap-3">
-                                <i class="bi bi-check-circle-fill text-yellow-500 text-xl"></i>
-                                <span class="font-medium">Inklusivitas Sosial</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <!-- STRUCTURE MEMBER SECTION -->
+    <section class="h-[60vh]">
+        <img src="<?= base_url('img/foto-profile-perusahaan.png') ?>" alt="Structure Member" class="w-full h-full object-cover">
     </section>
 
 </div>

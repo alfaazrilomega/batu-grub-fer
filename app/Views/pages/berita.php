@@ -1,105 +1,158 @@
 <?= $this->extend('layout/default') ?>
 
 <?= $this->section('content') ?>
-<main>
-    <section id="artikel-page" class="py-20 pt-32 bg-slate-200/30">
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                <div class="lg:col-span-8">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        
-                        <a href="<?= base_url('id/artikel/rekomendasi/'. $featured_article['slug'])?>" class="neu-flat p-4 flex flex-col gap-4 group hover:bg-white transition-colors duration-300" data-tilt>
-                            <div class="w-full h-48 flex-shrink-0">
-                                <img src="<?= base_url('img/'. $featured_article['image'])?>" class="w-full h-full object-cover rounded-lg" alt="<?= $featured_article['title']?>">
-                            </div>
-                            <div class="w-full flex flex-col px-1 h-full">
-                                <div class="flex justify-between items-center mb-2">
-                                    <span class="text-xs text-slate-400 font-medium">Oleh Tim Furnetic | <?= $featured_article['date']?></span>
-                                </div>
-                                <h2 class="text-xl font-bold text-slate-800 group-hover:text-blue-600 mb-2 leading-snug"><?= $featured_article['title']?></h2>
-                                <p class="text-sm text-slate-500 line-clamp-3"><?= $featured_article['snippet']?></p>
-                            </div>
-                        </a>
 
-                        <?php foreach ($side_articles as $article):?>
-                        <a href="<?= base_url('id/artikel/kategori/'. $article['slug'])?>" class="neu-flat p-4 flex flex-col gap-4 group hover:bg-white transition-colors duration-300" data-tilt>
-                            <div class="w-full h-48 flex-shrink-0">
-                                <img src="<?= base_url('img/'. $article['image'])?>" class="w-full h-full object-cover rounded-lg" alt="<?= $article['title']?>">
-                            </div>
-                            <div class="w-full flex flex-col px-1 h-full">
-                                <div class="flex justify-between items-center mb-2">
-                                    <span class="text-xs text-slate-400 font-medium">Oleh Tim Furnetic | <?= $article['date']?></span>
-                                </div>
-                                <h2 class="text-xl font-bold text-slate-800 group-hover:text-blue-600 mb-2 leading-snug"><?= $article['title']?></h2>
-                                <p class="text-sm text-slate-500 line-clamp-3">Klik untuk membaca selengkapnya tentang <?= strtolower($article['category'])?>.</p>
-                            </div>
-                        </a>
-                        <?php endforeach;?>
+<?php
+    // Fallback Data Protection
+    $title = $title ?? 'Berita & Siaran Pers';
+    $locale = $locale ?? 'id';
+    $hero_image = $hero_image ?? base_url('img/default-hero.jpg');
+    $featured = $featured_article ?? [];
+    $latest = $latest_articles ?? [];
+?>
 
-                    </div>
-                </div>
+<!-- HERO SECTION -->
+<section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden text-white" style="background-image: url('https://mind.id/storage/193/member-inalum.jpg'); background-size: cover; background-position: center;">
+    <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-transparent z-10"></div>
+    <div class="absolute -right-20 top-20 w-96 h-96 bg-yellow-500 rounded-full opacity-10 blur-3xl z-0"></div>
 
-                <aside class="lg:col-span-4">
-                    <div class="space-y-8 sticky top-28">
-                        <div class="neu-flat p-6">
-                            <h3 class="text-xl font-bold text-slate-700 mb-4 border-b pb-2">Artikel Lainnya</h3>
-                            <div class="space-y-4">
-                                
-                                <?php foreach ($side_articles as $article):?>
-                                <a href="<?= base_url('id/artikel/kategori/'. $article['slug'])?>" class="flex gap-4 items-center group">
-                                    <div class="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
-                                        <img src="<?= base_url('img/'. $article['image'])?>" class="w-full h-full object-cover" alt="<?= $article['title']?>">
-                                    </div>
-                                    <div>
-                                        <h4 class="font-bold text-sm text-slate-800 group-hover:text-blue-600 leading-tight"><?= $article['title']?></h4>
-                                        <span class="text-xs text-slate-400"><?= $article['date']?></span>
-                                    </div>
-                                </a>
-                                <?php endforeach;?>
-                            </div>
-                        </div>
-                    </div>
-                </aside>
-
+    <div class="container mx-auto px-6 relative z-20">
+        <div class="max-w-4xl">
+            <div class="inline-block px-3 py-1 mb-4 border border-yellow-500/50 rounded-full text-yellow-400 text-xs font-bold tracking-widest uppercase fade-up">
+                Berita & Publikasi
+            </div>
+            
+            <h1 class="text-4xl lg:text-6xl font-extrabold mb-6 leading-tight fade-up delay-100 drop-shadow-lg">
+                Kabar Terkini <br>
+                <span class="text-yellow-500">dari MIND ID.</span>
+            </h1>
+            
+            <p class="text-lg lg:text-xl text-gray-200 mb-8 max-w-2xl fade-up delay-200 leading-relaxed font-light">
+                Ikuti perkembangan terbaru, inovasi, dan pencapaian dari seluruh penjuru Grup Industri Pertambangan Indonesia.
+            </p>
+            
+            <div class="flex items-center text-sm text-gray-400 fade-up delay-300">
+                <a href="<?= site_url($locale) ?>" class="hover:text-white transition">Beranda</a>
+                <span class="mx-2">/</span>
+                <span class="text-yellow-500">Berita</span>
             </div>
         </div>
-    </section>
-</main>
-<?= $this->endSection() ?>
+    </div>
+</section>
 
-<?= $this->section('scripts') ?>
-<script src="https://unpkg.com/lucide@latest"></script>
-<script src="<?= base_url('assets/js/vanilla-tilt.min.js')?>"></script>
+<!-- 
+    MAIN CONTENT SECTION
+    Menggunakan desain grid yang Anda berikan
+-->
+<main class="py-16 lg:py-24 bg-gray-50">
+    <div class="container mx-auto px-6">
+        <div class="w-full">
+            
+            <!-- FEATURED ARTICLE -->
+            <?php if (!empty($featured)): ?>
+            <div class="mb-12" data-aos="fade-up">
+                <h2 class="text-[#16325C] font-bold text-lg mb-6 uppercase tracking-wide border-l-4 border-[#ED1C24] pl-4">
+                    Berita Utama
+                </h2>
+                
+                <a href="<?= base_url($locale . '/berita/' . ($featured['slug'] ?? '#')) ?>" class="group block bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100">
+                    <div class="relative h-64 md:h-96 w-full overflow-hidden">
+                        <img src="<?= $featured['image'] ?? '' ?>" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                             alt="<?= $featured['title'] ?? 'Featured Image' ?>">
+                    </div>
+                    
+                    <div class="p-6 md:p-8">
+                        <div class="flex items-center text-sm text-gray-500 mb-3 gap-3">
+                            <span class="flex items-center gap-1">
+                                <i class="ph-bold ph-calendar-blank"></i> <?= $featured['date'] ?? '' ?>
+                            </span>
+                        </div>
+                        
+                        <h3 class="text-2xl md:text-3xl font-bold text-[#16325C] mb-4 group-hover:text-[#ED1C24] transition-colors leading-tight">
+                            <?= $featured['title'] ?? '' ?>
+                        </h3>
+                        
+                        <p class="text-gray-600 leading-relaxed mb-6 line-clamp-3 md:line-clamp-none">
+                            <?= $featured['snippet'] ?? '' ?>
+                        </p>
+                        
+                        <span class="inline-flex items-center text-[#16325C] font-bold text-sm uppercase tracking-wide group-hover:underline">
+                            Baca Selengkapnya <i class="ph-bold ph-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                        </span>
+                    </div>
+                </a>
+            </div>
+            <?php endif; ?>
+
+            <!-- LATEST ARTICLES GRID -->
+            <div>
+                <h2 class="text-[#16325C] font-bold text-lg mb-6 uppercase tracking-wide border-l-4 border-[#ED1C24] pl-4">
+                    Berita Terbaru
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <?php foreach($latest as $index => $item): ?>
+                    <a href="<?= base_url($locale . '/berita/' . ($item['slug'] ?? '#')) ?>" 
+                       class="group flex flex-col bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 h-full" 
+                       data-aos="fade-up" data-aos-delay="<?= ($index + 1) * 100 ?>">
+                        
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="<?= $item['image'] ?? '' ?>" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="<?= $item['title'] ?>">
+                        </div>
+                        
+                        <div class="p-5 flex flex-col flex-grow">
+                            <div class="text-xs text-gray-400 mb-2 flex items-center gap-2">
+                                <i class="ph-bold ph-calendar-blank"></i> <?= $item['date'] ?? '' ?>
+                            </div>
+                            <h3 class="text-lg font-bold text-[#16325C] mb-3 leading-snug group-hover:text-[#ED1C24] transition-colors line-clamp-2">
+                                <?= $item['title'] ?? '' ?>
+                            </h3>
+                            <div class="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between text-xs font-medium text-gray-500">
+                                <span>Baca Artikel</span>
+                                <i class="ph-bold ph-caret-right text-[#ED1C24]"></i>
+                            </div>
+                        </div>
+                    </a>
+                    <?php endforeach; ?>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+
+<!-- Inject Custom Config & Scripts for this page -->
+<script src="https://unpkg.com/@phosphor-icons/web"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-    // Since the main layout already loads GSAP, we just use it.
-    // We also need to ensure lucide and vanilla-tilt are loaded if they aren't in the main layout.
-    lucide.createIcons();
-    
-    // GSAP Animations for this page specifically
-    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-        document.querySelectorAll("section h2, section p, .neu-flat:not(.no-scroll-anim)").forEach(el => {
-            gsap.from(el, {
-                scrollTrigger: {
-                    trigger: el,
-                    start: "top 85%",
-                    toggleActions: "play none none none"
-                },
-                y: 30,
-                opacity: 0,
-                duration: 1,
-                ease: "power3.out"
-            });
-        });
-    }
-    
-    // Vanilla Tilt Initialization for this page
-    if (typeof VanillaTilt !== 'undefined') {
-         VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
-            max: 15,
-            speed: 400,
-            glare: true,
-            "max-glare": 0.2,
-        });
-    }
+    // // Tailwind Config Injection (Jika belum ada di layout utama)
+    // // Kita gunakan script tag dengan type module atau langsung eksekusi jika tailwind CDN diload di layout
+    // if (typeof tailwind !== 'undefined') {
+    //     tailwind.config = {
+    //         theme: {
+    //             extend: {
+    //                 colors: {
+    //                     'mind-blue': '#16325C',
+    //                     'mind-blue-light': '#2A5C96',
+    //                     'mind-red': '#ED1C24',
+    //                     'text-secondary': '#4A5568',
+    //                 },
+    //                 fontFamily: {
+    //                     sans: ['Gotham', 'Arial', 'sans-serif'],
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+
+    // Init AOS
+    AOS.init({
+        duration: 800,
+        once: true,
+    });
 </script>
+
 <?= $this->endSection() ?>

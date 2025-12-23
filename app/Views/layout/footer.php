@@ -27,12 +27,12 @@
                 <h5 class="font-bold text-lg uppercase tracking-wider" data-i18n="footer_links_title">Tautan
                 </h5>
                 <nav class="mt-4 flex flex-col space-y-3">
-                    <a href="#" class="text-gray-300 hover:text-white" data-i18n="nav_home">Beranda</a>
-                    <a href="#" class="text-gray-300 hover:text-white" data-i18n="nav_company">Profil Perusahaan</a>
-                    <a href="#" class="text-gray-300 hover:text-white" data-i18n="nav_members">Anggota</a>
-                    <a href="#" class="text-gray-300 hover:text-white"
+                    <a href="<?= base_url($locale . '/') ?>" class="text-gray-300 hover:text-white" data-i18n="nav_home">Beranda</a>
+                    <a href="<?= base_url($locale . '/profil-perusahaan') ?>" class="text-gray-300 hover:text-white" data-i18n="nav_company">Profil Perusahaan</a>
+                    <a href="<?= base_url($locale . '/members') ?>" class="text-gray-300 hover:text-white" data-i18n="nav_members">Anggota</a>
+                    <a href="<?= base_url($locale . '/kontak') ?>" class="text-gray-300 hover:text-white"
                         data-i18n="nav_contact">Kontak</a>
-                    <a href="#" class="text-gray-300 hover:text-white" data-i18n="nav_career">Karir</a>
+                    <a href="<?= base_url($locale . '/karir') ?>" class="text-gray-300 hover:text-white" data-i18n="nav_career">Karir</a>
                 </nav>
             </div>
             <div>

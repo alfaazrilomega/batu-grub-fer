@@ -3,33 +3,29 @@
 <?= $this->section('content') ?>
 
 <!-- HERO SECTION -->
-<section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden text-white" 
-         style="background-image: url('<?= $hero_image_url ?? base_url('img/default-hero.jpg') ?>'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+<section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden text-white" style="background-image: url('<?= base_url('img/foto-hero-section-3.jpg') ?>'); background-size: cover; background-position: center;">
     <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-transparent z-10"></div>
     <div class="absolute -right-20 top-20 w-96 h-96 bg-yellow-500 rounded-full opacity-10 blur-3xl z-0"></div>
 
     <div class="container mx-auto px-6 relative z-20">
         <div class="max-w-4xl">
-            <?php if (!empty($pre_title)) : ?>
             <div class="inline-block px-3 py-1 mb-4 border border-yellow-500/50 rounded-full text-yellow-400 text-xs font-bold tracking-widest uppercase fade-up">
-                <?= $pre_title ?>
+                Karir
             </div>
-            <?php endif; ?>
             
             <h1 class="text-4xl lg:text-6xl font-extrabold mb-6 leading-tight fade-up delay-100 drop-shadow-lg">
-                <?= $hero_title ?? '' ?>
+                Berkarya, Berdampak, <br>
+                <span class="text-yellow-500">Bersama Kami.</span>
             </h1>
             
-            <?php if (!empty($hero_subtitle)) : ?>
             <p class="text-lg lg:text-xl text-gray-200 mb-8 max-w-2xl fade-up delay-200 leading-relaxed font-light">
-                <?= $hero_subtitle ?>
+                Jadilah bagian dari perjalanan kami dalam mengelola kekayaan mineral Indonesia untuk masa depan yang lebih baik.
             </p>
-            <?php endif; ?>
             
             <div class="flex items-center text-sm text-gray-400 fade-up delay-300">
-                <a href="<?= base_url('/') ?>" class="hover:text-white transition">Beranda</a>
+                <a href="<?= site_url($locale) ?>" class="hover:text-white transition">Beranda</a>
                 <span class="mx-2">/</span>
-                <span class="text-yellow-500"><?= $page_title ?? '' ?></span>
+                <span class="text-yellow-500">Karir</span>
             </div>
         </div>
     </div>
@@ -37,18 +33,21 @@
 
 <!-- 
     MAIN CONTENT SECTION
+    Revisi: Menggunakan desain baru dengan Grid System dan Warna Brand yang presisi
 -->
+<!-- Load Phosphor Icons untuk panah -->
+<script src="https://unpkg.com/@phosphor-icons/web"></script>
+
 <div class="bg-white">
     <div class="container mx-auto px-6">
         <div class="flex flex-wrap lg:flex-nowrap py-12 lg:py-24 lg:space-x-24">
             
             <!-- Kolom Kiri: Judul Halaman -->
             <div class="w-full lg:w-1/3 mb-8 lg:mb-0">
-                <h1 class="text-mind-blue font-bold text-xl md:text-2xl mb-8 uppercase tracking-wide border-l-4 border-red-600 pl-4">
-                    <?= $page_title ?>
+                <!-- Menggunakan arbitrary value [#16325C] untuk mind-blue dan [#ED1C24] untuk mind-red agar warna akurat tanpa config global -->
+                <h1 class="text-[#16325C] font-bold text-xl md:text-2xl mb-8 uppercase tracking-wide border-l-4 border-[#ED1C24] pl-4">
+                    <?= $page_title ?? 'Lowongan Pekerjaan' ?>
                 </h1>
-                
-                <!-- Placeholder Blockquote (Sesuai original HTML) -->
                 <blockquote class="text-2xl font-thin leading-relaxed mb-8 text-gray-500 italic">
                 </blockquote>
             </div>
@@ -56,30 +55,97 @@
             <!-- Kolom Kanan: Isi Konten -->
             <div class="w-full lg:w-2/3">
                 <div class="prose max-w-none text-center lg:text-left">
-                    
-                    <!-- Heading Konten (Statis di view) -->
-                    <h3 class="text-2xl md:text-3xl font-bold text-mind-blue mb-8 leading-snug">
+                    <h3 class="text-2xl md:text-3xl font-bold text-[#16325C] mb-8 leading-snug">
                         Saat ini tersedia lowongan pekerjaan di <br>lingkungan Grup MIND ID
                     </h3>
-
-                    <!-- Body Konten (Statis di view) -->
                     <div class="text-lg leading-relaxed text-gray-700">
                         <p class="mb-4">Silakan kunjungi portal rekrutmen resmi kami untuk melihat daftar posisi yang dibuka dan melakukan pendaftaran melalui tautan berikut:</p>
-            
                         <p class="mb-6">Link Portal Rekrutmen Grup MIND ID: 
                             <a href="https://career.mind.id/" target="_blank" rel="noopener" class="text-blue-700 font-bold hover:underline break-all">
                                 https://career.mind.id
                             </a>
                         </p>
-                        
                         <p class="font-bold mt-12 text-gray-800">Seluruh proses rekrutmen MIND ID Group tidak dipungut biaya apa pun.</p>
                     </div>
-
                 </div>
             </div>
 
         </div>
     </div>
 </div>
+
+<!-- 
+    CAREER AREAS GRID SECTION
+    Bagian baru untuk menampilkan jalur karir dengan kartu interaktif
+-->
+<section class="py-16 bg-gray-50 border-t border-gray-200">
+    <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-bold text-[#16325C] mb-12 text-center">Jalur Karir Kami</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            <!-- Card 1: Fresh Graduate -->
+            <a href="<?= base_url($locale . '/karir/detail/fresh-graduate') ?>" class="group relative aspect-[3/4] overflow-hidden rounded-lg cursor-pointer shadow-md block">
+                <img src="https://mind.id/storage/190/member-antam.jpg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Fresh Graduate">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-80"></div>
+                <div class="absolute bottom-0 left-0 p-6 w-full">
+                    <h3 class="text-white text-xl font-bold mb-2 uppercase tracking-wide">Fresh Graduate</h3>
+                    <div class="h-1 w-0 bg-[#ED1C24] group-hover:w-16 transition-all duration-500 mb-2"></div>
+                    <div class="flex justify-end opacity-0 group-hover:opacity-100 transition-opacity translate-y-4 group-hover:translate-y-0">
+                        <div class="w-8 h-8 rounded-full bg-white text-[#ED1C24] flex items-center justify-center">
+                            <i class="ph-bold ph-arrow-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Card 2: Professional -->
+            <a href="<?= base_url($locale . '/karir/detail/professional') ?>" class="group relative aspect-[3/4] overflow-hidden rounded-lg cursor-pointer shadow-md block">
+                <img src="https://mind.id/storage/191/member-bukit-asam.jpg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Professional">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-80"></div>
+                <div class="absolute bottom-0 left-0 p-6 w-full">
+                    <h3 class="text-white text-xl font-bold mb-2 uppercase tracking-wide">Professional</h3>
+                    <div class="h-1 w-0 bg-[#ED1C24] group-hover:w-16 transition-all duration-500 mb-2"></div>
+                    <div class="flex justify-end opacity-0 group-hover:opacity-100 transition-opacity translate-y-4 group-hover:translate-y-0">
+                        <div class="w-8 h-8 rounded-full bg-white text-[#ED1C24] flex items-center justify-center">
+                            <i class="ph-bold ph-arrow-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Card 3: Internship -->
+            <a href="<?= base_url($locale . '/karir/detail/internship') ?>" class="group relative aspect-[3/4] overflow-hidden rounded-lg cursor-pointer shadow-md block">
+                <img src="https://mind.id/storage/192/member-freeport.jpg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Internship">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-80"></div>
+                <div class="absolute bottom-0 left-0 p-6 w-full">
+                    <h3 class="text-white text-xl font-bold mb-2 uppercase tracking-wide">Internship</h3>
+                    <div class="h-1 w-0 bg-[#ED1C24] group-hover:w-16 transition-all duration-500 mb-2"></div>
+                    <div class="flex justify-end opacity-0 group-hover:opacity-100 transition-opacity translate-y-4 group-hover:translate-y-0">
+                        <div class="w-8 h-8 rounded-full bg-white text-[#ED1C24] flex items-center justify-center">
+                            <i class="ph-bold ph-arrow-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Card 4: XPLORER Program -->
+            <a href="<?= base_url($locale . '/karir/detail/xplorer') ?>" class="group relative aspect-[3/4] overflow-hidden rounded-lg cursor-pointer shadow-md block">
+                <img src="https://mind.id/storage/193/member-inalum.jpg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="XPLORER Program">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-80"></div>
+                <div class="absolute bottom-0 left-0 p-6 w-full">
+                    <h3 class="text-white text-xl font-bold mb-2 uppercase tracking-wide">XPLORER Program</h3>
+                    <div class="h-1 w-0 bg-[#ED1C24] group-hover:w-16 transition-all duration-500 mb-2"></div>
+                    <div class="flex justify-end opacity-0 group-hover:opacity-100 transition-opacity translate-y-4 group-hover:translate-y-0">
+                        <div class="w-8 h-8 rounded-full bg-white text-[#ED1C24] flex items-center justify-center">
+                            <i class="ph-bold ph-arrow-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+    </div>
+</section>
 
 <?= $this->endSection() ?>

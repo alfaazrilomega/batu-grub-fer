@@ -6,11 +6,10 @@ class MemberController extends BaseController
 {
     public function index()
     {
-        $data['pre_title'] = 'Komunitas';
-        $data['hero_title'] = 'Anggota Kami';
-        $data['hero_subtitle'] = 'Jaringan anggota kami yang luas dan solid adalah pilar utama kekuatan dan keberlanjutan Grup MIND ID dalam mengelola kekayaan alam Indonesia.';
+        $locale = service('request')->getLocale();
+
+        $data['locale'] = $locale;
         $data['page_title'] = 'Anggota Kami';
-        $data['hero_image_url'] = base_url('img/foto-komitmen1.png');
 
         // Data ini diambil dari konten HTML MIND ID.
         $data['members_description'] = "MIND ID adalah wajah Indonesia yang kaya akan sumber daya dan kaya akan talenta dari putra-putri Indonesia yang siap berkarya dan bersinergi memberikan yang terbaik bagi negeri.";
