@@ -1,0 +1,233 @@
+<?= $this->extend('layout/default') ?>
+
+<?= $this->section('content') ?>
+
+<!-- Chosen Palette: Corporate Navy & Gold (GESID Identity) -->
+<!-- Application Structure Plan: 
+    1. Hero: Photo Background + Dark Gradient Overlay.
+    2. Intro: Centered Text Narrative.
+    3. Vision & Mission: Clean 2-column grid WITHOUT the section header text above it.
+    4. Impact: Image + Text Zig-Zag Layout.
+-->
+<!-- Visualization & Content Choices:
+    - Visi/Misi Header Removed: The section now jumps straight to the two cards, creating a cleaner, more direct flow.
+-->
+<!-- CONFIRMATION: NO SVG graphics used directly. NO Mermaid JS used. -->
+
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+    
+    .profil-page-content { 
+        font-family: 'Inter', sans-serif;
+    }
+    
+    .fade-up { 
+        opacity: 0; 
+        transform: translateY(30px); 
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out; 
+    }
+    .fade-up.visible { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+    
+    .hero-bg {
+        background-color: #0a2540;
+        background-image: url("https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+</style>
+
+<div class="profil-page-content bg-gray-50 text-gray-800">
+
+    <!-- HERO SECTION -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden hero-bg text-white">
+        <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-transparent z-10"></div>
+        <div class="absolute -right-20 top-20 w-96 h-96 bg-yellow-500 rounded-full opacity-10 blur-3xl z-0"></div>
+
+        <div class="container mx-auto px-6 relative z-20">
+            <div class="max-w-4xl">
+                <div class="inline-block px-3 py-1 mb-4 border border-yellow-500/50 rounded-full text-yellow-400 text-xs font-bold tracking-widest uppercase fade-up">
+                    Tentang Kami
+                </div>
+                
+                <h1 class="text-4xl lg:text-6xl font-extrabold mb-6 leading-tight fade-up delay-100 drop-shadow-lg">
+                    Membangun Desa, <br>
+                    <span class="text-yellow-500">Memajukan Indonesia.</span>
+                </h1>
+                
+                <p class="text-lg lg:text-xl text-gray-200 mb-8 max-w-2xl fade-up delay-200 leading-relaxed font-light">
+                    Kami adalah wajah baru pergerakan pemuda yang berfokus pada pengembangan desa berkelanjutan melalui teknologi dan kearifan lokal.
+                </p>
+                
+                <div class="flex items-center text-sm text-gray-400 fade-up delay-300">
+                    <a href="#" class="hover:text-white transition">Beranda</a>
+                    <span class="mx-2">/</span>
+                    <span class="text-yellow-500">Tentang Kami</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTRO -->
+    <section class="py-20 lg:py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto fade-up">
+                <h2 class="text-yellow-600 font-bold uppercase tracking-wide text-sm mb-2">Siapa Kami</h2>
+                <h3 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">Generasi Penggerak Perubahan</h3>
+                
+                <div class="prose text-gray-600 leading-relaxed text-lg text-justify">
+                    <p class="mb-4">
+                        Generasi Emas Indonesia (GESID) bukan sekadar organisasi, melainkan sebuah gerakan. Kami hadir sebagai jembatan yang menghubungkan potensi desa yang tak terbatas dengan semangat inovasi pemuda.
+                    </p>
+                    <p>
+                        Di era globalisasi, desa seringkali tertinggal. Namun bagi kami, desa adalah masa depan. Melalui sinergi dan kolaborasi, kami berkomitmen untuk menciptakan ekosistem yang mandiri.
+                    </p>
+                </div>
+                
+                <div class="mt-10 inline-block border-l-4 border-yellow-500 pl-6 py-2 bg-yellow-50 rounded-r-lg text-left shadow-sm">
+                    <p class="text-xl font-light italic text-gray-800">
+                        "Bergerak Bersama Membangun Desa Untuk Indonesia"
+                    </p>
+                    <p class="text-sm font-bold mt-2 text-gray-500">— Visi GESID</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VISI & MISI (CLEAN - NO HEADER TEXT) -->
+    <section class="py-24 bg-gray-900 text-white relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+            <div class="absolute right-0 bottom-0 w-96 h-96 bg-blue-500 rounded-full blur-[120px]"></div>
+            <div class="absolute left-0 top-0 w-96 h-96 bg-yellow-500 rounded-full blur-[120px]"></div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <!-- Header Text Removed Here -->
+
+            <!-- Balanced Grid -->
+            <div class="grid md:grid-cols-2 gap-8 lg:gap-12 items-stretch">
+                
+                <!-- KOLOM 1: VISI (Left) -->
+                <div class="group bg-gray-800 p-10 lg:p-14 rounded-3xl border border-gray-700 hover:border-yellow-500 transition-all duration-300 hover:shadow-2xl hover:shadow-yellow-500/10 fade-up h-full flex flex-col justify-center text-center relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-yellow-500/10 to-transparent rounded-bl-full"></div>
+                    
+                    <h4 class="text-yellow-500 font-bold uppercase tracking-widest mb-6 text-sm">Visi Kami</h4>
+                    <p class="text-3xl lg:text-4xl text-white font-serif italic leading-snug">
+                        "Bergerak Bersama Membangun Desa Untuk Indonesia"
+                    </p>
+                    <div class="w-16 h-1 bg-gray-600 mx-auto mt-8 group-hover:bg-yellow-500 transition-colors duration-300"></div>
+                </div>
+
+                <!-- KOLOM 2: MISI (Right) -->
+                <div class="group bg-gray-800 p-10 lg:p-14 rounded-3xl border border-gray-700 hover:border-yellow-500 transition-all duration-300 hover:shadow-2xl hover:shadow-yellow-500/10 fade-up delay-100 h-full flex flex-col justify-center">
+                    
+                    <h4 class="text-yellow-500 font-bold uppercase tracking-widest mb-8 text-sm text-center md:text-left">Misi Kami</h4>
+                    
+                    <ul class="space-y-6 text-gray-300">
+                        <li class="flex gap-4 items-start">
+                            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center mt-1 group-hover:bg-yellow-500 group-hover:text-blue-900 transition-colors duration-300">
+                                <span class="font-bold text-sm">1</span>
+                            </div>
+                            <div>
+                                <strong class="block text-white text-lg mb-1">Adaptasi Teknologi</strong>
+                                <span class="text-sm text-gray-400">Menciptakan lingkungan desa yang adaptif terhadap teknologi terbarukan.</span>
+                            </div>
+                        </li>
+                        <li class="flex gap-4 items-start">
+                            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center mt-1 group-hover:bg-yellow-500 group-hover:text-blue-900 transition-colors duration-300">
+                                <span class="font-bold text-sm">2</span>
+                            </div>
+                            <div>
+                                <strong class="block text-white text-lg mb-1">Daya Saing Pemuda</strong>
+                                <span class="text-sm text-gray-400">Meningkatkan Knowledge, Leadership, dan Entrepreneurship pemuda desa.</span>
+                            </div>
+                        </li>
+                        <li class="flex gap-4 items-start">
+                            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center mt-1 group-hover:bg-yellow-500 group-hover:text-blue-900 transition-colors duration-300">
+                                <span class="font-bold text-sm">3</span>
+                            </div>
+                            <div>
+                                <strong class="block text-white text-lg mb-1">Ruang Aktualisasi</strong>
+                                <span class="text-sm text-gray-400">Menyediakan panggung lokal dan global bagi inovasi anak desa.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- IMPACT SECTION -->
+    <section class="py-24 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row gap-16 items-center">
+                <div class="lg:w-1/2 order-2 lg:order-1 fade-up">
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl group">
+                        <div class="aspect-video bg-gray-300 w-full object-cover relative">
+                             <img src="/img/foto-profile-perusahaan.png" alt="Masa Depan Desa" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/90 via-black/50 to-transparent p-8">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2 order-1 lg:order-2 fade-up">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Masa Depan Berkelanjutan</h2>
+                    <div class="prose text-gray-600 leading-relaxed text-lg text-justify">
+                        <p class="mb-4">
+                            Keberlanjutan bukan hanya tentang lingkungan, tetapi juga ekonomi dan sosial. GESID berkomitmen untuk memastikan dampak jangka panjang.
+                        </p>
+                        <p class="mb-4">
+                            Kami mengajak seluruh elemen masyarakat untuk berkolaborasi. Seperti halnya mengelola sumber daya untuk kemakmuran, GESID mengelola potensi manusia untuk peradaban.
+                        </p>
+                        <ul class="space-y-3 mt-6">
+                            <li class="flex items-center gap-3">
+                                <i class="bi bi-check-circle-fill text-yellow-500 text-xl"></i>
+                                <span class="font-medium">Kolaborasi Multi-Sektor</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="bi bi-check-circle-fill text-yellow-500 text-xl"></i>
+                                <span class="font-medium">Pemberdayaan Berbasis Data</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="bi bi-check-circle-fill text-yellow-500 text-xl"></i>
+                                <span class="font-medium">Inklusivitas Sosial</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Use a more specific selector to avoid conflicts
+        const elementsToAnimate = document.querySelectorAll('.profil-page-content .fade-up');
+
+        if (elementsToAnimate.length > 0) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            elementsToAnimate.forEach(el => {
+                observer.observe(el);
+            });
+        }
+    });
+</script>
+
+<?= $this->endSection() ?>

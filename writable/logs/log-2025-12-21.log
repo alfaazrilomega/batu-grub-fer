@@ -1,0 +1,128 @@
+INFO - 2025-12-21 05:59:15 --> REDIRECTED ROUTE at http://localhost:8080/id
+INFO - 2025-12-21 06:29:21 --> REDIRECTED ROUTE at http://localhost:8080/id
+INFO - 2025-12-21 06:45:45 --> REDIRECTED ROUTE at http://localhost:8080/id
+CRITICAL - 2025-12-21 09:44:15 --> Error: Cannot access protected property CodeIgniter\HTTP\IncomingRequest::$uri
+[Method: GET, Route: id]
+in APPPATH\Controllers\BaseController.php on line 59.
+ 1 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\BaseController->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 2 SYSTEMPATH\CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 7 SYSTEMPATH\rewrite.php(44): require_once('D:\\xamp1\\htdocs\\ci-mind\\public\\index.php')
+CRITICAL - 2025-12-21 09:48:17 --> Error: Call to undefined method CodeIgniter\HTTP\IncomingRequest::isValidLocale()
+[Method: GET, Route: id]
+in APPPATH\Controllers\BaseController.php on line 63.
+ 1 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\BaseController->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 2 SYSTEMPATH\CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 7 SYSTEMPATH\rewrite.php(44): require_once('D:\\xamp1\\htdocs\\ci-mind\\public\\index.php')
+INFO - 2025-12-21 09:48:33 --> REDIRECTED ROUTE at http://localhost:8080/id
+CRITICAL - 2025-12-21 09:48:33 --> Error: Call to undefined method CodeIgniter\HTTP\IncomingRequest::isValidLocale()
+[Method: GET, Route: id]
+in APPPATH\Controllers\BaseController.php on line 63.
+ 1 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\BaseController->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 2 SYSTEMPATH\CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 7 SYSTEMPATH\rewrite.php(44): require_once('D:\\xamp1\\htdocs\\ci-mind\\public\\index.php')
+CRITICAL - 2025-12-21 09:50:35 --> Error: Cannot access protected property CodeIgniter\HTTP\IncomingRequest::$uri
+[Method: GET, Route: id]
+in APPPATH\Views\layout\header.php on line 3.
+ 1 SYSTEMPATH\View\View.php(226): include()
+ 2 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\View\View.php(475): CodeIgniter\View\View->render('layout/header', null, true)
+ 4 APPPATH\Views\layout\default.php(96): CodeIgniter\View\View->include('layout/header')
+ 5 SYSTEMPATH\View\View.php(226): include('D:\\xamp1\\htdocs\\ci-mind\\app\\Views\\layout\\default.php')
+ 6 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 7 SYSTEMPATH\View\View.php(242): CodeIgniter\View\View->render('layout/default', [], true)
+ 8 SYSTEMPATH\Common.php(1199): CodeIgniter\View\View->render('pages/home', [], true)
+ 9 APPPATH\Controllers\Home.php(19): view('pages/home')
+10 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->index()
+11 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+12 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+15 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+16 SYSTEMPATH\rewrite.php(44): require_once('D:\\xamp1\\htdocs\\ci-mind\\public\\index.php')
+CRITICAL - 2025-12-21 12:06:03 --> ErrorException: Undefined variable $locale
+[Method: GET, Route: id]
+in APPPATH\Views\pages\home.php on line 86.
+ 1 APPPATH\Views\pages\home.php(86): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $locale', 'D:\\xamp1\\htdocs\\ci-mind\\app\\Views\\pages\\home.php', 86)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\xamp1\\htdocs\\ci-mind\\app\\Views\\pages\\home.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1199): CodeIgniter\View\View->render('pages/home', [], true)
+ 5 APPPATH\Controllers\Home.php(19): view('pages/home')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\xamp1\\htdocs\\ci-mind\\public\\index.php')
+CRITICAL - 2025-12-21 12:06:06 --> ErrorException: Undefined variable $locale
+[Method: GET, Route: id]
+in APPPATH\Views\pages\home.php on line 86.
+ 1 APPPATH\Views\pages\home.php(86): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $locale', 'D:\\xamp1\\htdocs\\ci-mind\\app\\Views\\pages\\home.php', 86)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\xamp1\\htdocs\\ci-mind\\app\\Views\\pages\\home.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1199): CodeIgniter\View\View->render('pages/home', [], true)
+ 5 APPPATH\Controllers\Home.php(19): view('pages/home')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\xamp1\\htdocs\\ci-mind\\public\\index.php')
+CRITICAL - 2025-12-21 12:07:58 --> ErrorException: Undefined variable $locale
+[Method: GET, Route: id]
+in APPPATH\Views\pages\home.php on line 86.
+ 1 APPPATH\Views\pages\home.php(86): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $locale', 'D:\\xamp1\\htdocs\\ci-mind\\app\\Views\\pages\\home.php', 86)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\xamp1\\htdocs\\ci-mind\\app\\Views\\pages\\home.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1199): CodeIgniter\View\View->render('pages/home', [], true)
+ 5 APPPATH\Controllers\Home.php(19): view('pages/home')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\xamp1\\htdocs\\ci-mind\\public\\index.php')
+CRITICAL - 2025-12-21 12:08:02 --> ErrorException: Undefined variable $locale
+[Method: GET, Route: id]
+in APPPATH\Views\pages\home.php on line 86.
+ 1 APPPATH\Views\pages\home.php(86): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $locale', 'D:\\xamp1\\htdocs\\ci-mind\\app\\Views\\pages\\home.php', 86)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\xamp1\\htdocs\\ci-mind\\app\\Views\\pages\\home.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1199): CodeIgniter\View\View->render('pages/home', [], true)
+ 5 APPPATH\Controllers\Home.php(19): view('pages/home')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\xamp1\\htdocs\\ci-mind\\public\\index.php')
+CRITICAL - 2025-12-21 14:48:20 --> ErrorException: Undefined variable $locale
+[Method: GET, Route: id/profil-perusahaan]
+in APPPATH\Views\pages\profil.php on line 15.
+ 1 APPPATH\Views\pages\profil.php(15): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $locale', 'D:\\xamp1\\htdocs\\ci-mind\\app\\Views\\pages\\profil.php', 15)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\xamp1\\htdocs\\ci-mind\\app\\Views\\pages\\profil.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1199): CodeIgniter\View\View->render('pages/profil', [], true)
+ 5 APPPATH\Controllers\Profil.php(11): view('pages/profil')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Profil->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Profil))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\xamp1\\htdocs\\ci-mind\\public\\index.php')
