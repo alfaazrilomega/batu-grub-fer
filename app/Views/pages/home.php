@@ -68,24 +68,37 @@
         </div>
     </section>
 
-    <!-- 2. PROFILE SECTION -->
+    <!-- 2. PROFILE SECTION (UPDATED: VIDEO YOUTUBE) -->
     <section class="py-20 md:py-28 bg-dark-navy text-white section-fade-in">
         <div class="container mx-auto px-6">
             <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <div class="aspect-video bg-cover bg-center rounded-lg cursor-pointer group"
-                    style="background-image: url('<?= base_url('img/foto-profile-perusahaan.png') ?>');">
-                    <div class="w-full h-full flex items-center justify-center bg-black/30 rounded-lg">
-                        <button
-                            class="w-20 h-20 rounded-full bg-mind-red/80 flex items-center justify-center group-hover:scale-110 transition-transform"><i
-                                class="ph-fill ph-play text-4xl text-white"></i></button>
-                    </div>
+                
+                <!-- VIDEO CONTAINER -->
+                <!-- Menggunakan layout yang sama seperti di profil.php -->
+                <div class="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl border-4 border-white/10 group bg-black">
+                     <!-- 
+                        YOUTUBE IFRAME
+                        Ganti src dengan ID Video yang diinginkan
+                     -->
+                     <iframe class="absolute inset-0 w-full h-full" 
+                            src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0" 
+                            title="Company Profile" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                    </iframe>
                 </div>
+
+                <!-- TEXT CONTENT -->
                 <div>
                     <h2 class="text-4xl font-bold"><?= lang('Home.profile_heading') ?></h2>
                     <p class="mt-4 text-lg text-gray-300"><?= lang('Home.profile_text') ?></p>
                     <a href="<?= site_url($locale . '/profil-perusahaan') ?>"
-                        class="mt-8 inline-flex items-center gap-3 bg-mind-red text-white font-bold py-3 px-8 rounded-full"><?= lang('Home.profile_cta') ?></a>
+                        class="mt-8 inline-flex items-center gap-3 bg-mind-red text-white font-bold py-3 px-8 rounded-full hover:bg-red-700 transition-colors">
+                        <?= lang('Home.profile_cta') ?>
+                    </a>
                 </div>
+
             </div>
         </div>
     </section>
