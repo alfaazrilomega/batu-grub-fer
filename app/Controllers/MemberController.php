@@ -23,9 +23,8 @@ class MemberController extends BaseController
         // Mengambil data meta untuk halaman anggota
         $meta = $this->metaModel->where('slug_meta_id', 'halaman-anggota')->first();
 
-        // Mengambil data anggota dari model dengan paginasi, 6 per halaman
-        $data['members'] = $this->anggotaModel->paginate(6, 'default');
-        $data['pager'] = $this->anggotaModel->pager;
+        // Mengambil semua data anggota dari model
+        $data['members'] = $this->anggotaModel->findAll();
         
         $data['locale'] = $locale;
         $data['page_title'] = 'Anggota Kami';

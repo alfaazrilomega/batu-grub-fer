@@ -54,7 +54,7 @@
                             <div class="absolute inset-0 rounded-full border-4 border-transparent group-hover:border-mind-blue/10 transition-colors duration-300"></div>
                             <div class="w-3/4 h-3/4 flex items-center justify-center relative z-10 p-2">
                                 <?php if (!empty($member['logo_anggota'])) : ?>
-                                    <img src="<?= base_url('uploads/anggota/' . $member['logo_anggota']) ?>" 
+                                    <img src="<?= base_url('img/' . $member['logo_anggota']) ?>" 
                                          alt="<?= $member['nama_perusahaan_anggota'] ?>" 
                                          class="w-full h-full object-contain filter grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110">
                                 <?php else : ?>
@@ -68,10 +68,33 @@
                 <?php endforeach; ?>
             </div>
 
-            <!-- PAGINATION -->
-            <div class="mt-12">
-                <?= $pager->links('default', 'custom_full') ?>
-            </div>
+            <!-- SECTION 2: DETAIL LIST -->
+            <section class="py-12 lg:py-24 bg-white">
+                <div class="container mx-auto px-6">
+                    
+                    <?php foreach ($members as $member) : ?>
+                    <div class="pb-12 lg:pt-16 border-b border-gray-200 last:border-0 scroll-mt-24" id="<?= $member['id_anggota'] ?>">
+                        <div class="w-full h-64 md:h-[400px] bg-gray-100 bg-center bg-no-repeat bg-cover rounded-2xl overflow-hidden mb-8 shadow-lg group" 
+                            style="background-image: url('<?php echo (!empty($member['image_anggota'])) ? base_url('img/' . $member['image_anggota']) : 'https://via.placeholder.com/800x400.png?text=Image+Not+Available'; ?>')">
+                            <!-- Overlay tipis -->
+                            <div class="w-full h-full bg-black/10 group-hover:bg-black/0 transition-colors duration-500"></div>
+                        </div>
+                        <div class="flex flex-wrap md:-mx-6">
+                            <div class="w-full md:px-6">
+                                <div class="prose max-w-none mb-8 text-gray-700">
+                                    <h2 class="text-3xl font-bold text-mind-blue mb-6 border-l-4 border-red-600 pl-4"><?= $member['nama_perusahaan_anggota'] ?></h2>
+                                    <div class="leading-relaxed text-gray-600 space-y-4 text-justify">
+                                    <?= $member['deskripsi_anggota_id'] ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+
+                </div>
+            </section>
+
         <?php else : ?>
             <div class="text-center py-12">
                 <p class="text-gray-500">Data anggota tidak ditemukan.</p>

@@ -14,7 +14,7 @@
                         <?php foreach ($slider as $s) : ?>
                             <!-- Dynamic Slide -->
                             <div class="swiper-slide bg-cover bg-center relative"
-                                style="background-image: url('<?= base_url('uploads/slider/' . $s['gambar_slider']); ?>');">
+                                style="background-image: url('<?= base_url('img/' . $s['foto_slider']); ?>');">
                                 <div class="hero-gradient z-0"></div>
                                 <div class="container mx-auto px-6 h-full flex items-center relative z-10">
                                     <div class="max-w-3xl text-white text-left">

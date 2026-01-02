@@ -16,6 +16,7 @@ class AnggotaModel extends Model
         'nama_perusahaan_anggota',
         'deskripsi_anggota_id',
         'logo_anggota',
+        'image_anggota',
         'title_anggota_id',
         'slug_anggota_id',
         'meta_desc_id',
