@@ -86,6 +86,40 @@
         }
     </style>
     
+    <!-- Custom Hamburger Menu Style -->
+    <style>
+        /* Sembunyikan scrollbar saat menu terbuka */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* ANIMASI MENU ITEM: Soft Fade Up Stagger */
+        .nav-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+
+        .menu-active .nav-item {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Staggered Delays (Muncul berurutan) */
+        .menu-active .nav-item:nth-child(1) { transition-delay: 0.2s; }
+        .menu-active .nav-item:nth-child(2) { transition-delay: 0.3s; }
+        .menu-active .nav-item:nth-child(3) { transition-delay: 0.4s; }
+        .menu-active .nav-item:nth-child(4) { transition-delay: 0.5s; }
+        .menu-active .nav-item:nth-child(5) { transition-delay: 0.6s; }
+        .menu-active .nav-item:nth-child(6) { transition-delay: 0.7s; }
+
+        /* Background Pattern Halus */
+        .topo-bg {
+            background-color: #16325C;
+            background-image: radial-gradient(#1e4278 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+    </style>
+
     <!-- Custom App CSS -->
     <link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>">
 

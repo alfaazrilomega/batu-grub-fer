@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // --- BILINGUAL LOGIC ---
     const dictionary = {
-        logo: { id: "Batu Grub", en: "Batu Grub" },
+        logo: { id: "Batu Group", en: "Batu Group" },
         nav_home: { id: "Beranda", en: "Home" },
         nav_company: { id: "Profil Perusahaan", en: "Profile Company" },
         nav_members: { id: "Anggota", en: "Members" },

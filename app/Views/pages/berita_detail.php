@@ -3,9 +3,9 @@
 <?= $this->section('content') ?>
 
 <?php
-    // Data Fallback
-    $article = $article ?? [];
-    $related = $related_articles ?? [];
+    // Fallback jika variabel tidak ada
+    $artikel = $artikel ?? [];
+    $related_articles = $related_articles ?? [];
     $locale = $locale ?? 'id';
 ?>
 
@@ -16,7 +16,7 @@
 <div class="relative w-full h-[500px] lg:h-[600px] bg-[#16325C] overflow-hidden group">
     <!-- Background Image Dynamic -->
     <div class="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105" 
-         style="background-image: url('<?= $article['image'] ?? '' ?>')">
+         style="background-image: url('<?= base_url('uploads/artikel/' . esc($artikel['foto_artikel'] ?? '')) ?>')">
     </div>
     
     <!-- Advanced Gradient Overlay -->
@@ -29,12 +29,12 @@
                 <!-- Date Line -->
                 <div class="flex items-center gap-3 mb-6 text-yellow-400 font-bold tracking-widest uppercase text-sm md:text-base animate-fade-in-up drop-shadow-md">
                     <span class="w-12 h-1 bg-yellow-400 rounded-full shadow-sm"></span>
-                    <span><?= $article['date'] ?? '' ?></span>
+                    <span><?= esc(date('d M Y', strtotime($artikel['created_at'] ?? ''))) ?></span>
                 </div>
 
                 <!-- Title Creative Typography -->
                 <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight drop-shadow-lg mb-4">
-                    <?= $article['title'] ?? 'Judul Artikel' ?>
+                    <?= esc($artikel['judul_artikel_id'] ?? 'Judul Artikel') ?>
                 </h1>
             </div>
         </div>
@@ -49,7 +49,7 @@
                 <a href="<?= base_url($locale . '/berita') ?>" class="hover:text-yellow-400 transition">Berita</a>
                 <span class="text-gray-500">/</span>
                 <span class="text-gray-100 truncate max-w-[200px] md:max-w-md font-semibold">
-                    <?= $article['title'] ?? '' ?>
+                    <?= esc($artikel['judul_artikel_id'] ?? '') ?>
                 </span>
             </div>
         </div>
@@ -69,7 +69,7 @@
                 <!-- Content Body -->
                 <!-- Menggunakan Typography Plugin Tailwind -->
                 <div class="prose prose-lg max-w-none prose-headings:text-[#16325C] prose-headings:font-bold prose-p:text-gray-600 prose-p:leading-relaxed prose-blockquote:border-[#ED1C24] prose-blockquote:bg-gray-50 prose-blockquote:py-2 prose-blockquote:pr-4 prose-a:text-[#ED1C24] hover:prose-a:text-[#16325C] transition-colors">
-                    <?= $article['content'] ?? '' ?>
+                    <?= $artikel['konten_artikel_id'] ?? '' ?>
                 </div>
 
                 <!-- Share Section -->
@@ -108,18 +108,18 @@
                     </div>
                     
                     <div class="space-y-6">
-                        <?php foreach($related as $item): ?>
+                        <?php foreach($related_articles as $item): ?>
                         <!-- Related Item -->
-                        <a href="<?= base_url($locale . '/berita/' . ($item['slug'] ?? '#')) ?>" class="group flex gap-4 items-start">
+                        <a href="<?= base_url($locale . '/berita/' . esc($item['slug_artikel_id'] ?? '#')) ?>" class="group flex gap-4 items-start">
                             <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 relative shadow-sm">
-                                <img src="<?= $item['image'] ?? '' ?>" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" alt="<?= $item['title'] ?>">
+                                <img src="<?= base_url('uploads/artikel/' . esc($item['foto_artikel'] ?? '')) ?>" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" alt="<?= esc($item['alt_artikel_id'] ?? '') ?>">
                             </div>
                             <div>
                                 <h4 class="font-bold text-sm text-[#16325C] group-hover:text-[#ED1C24] leading-snug line-clamp-2 transition-colors mb-2">
-                                    <?= $item['title'] ?? '' ?>
+                                    <?= esc($item['judul_artikel_id'] ?? '') ?>
                                 </h4>
                                 <span class="text-xs text-gray-400 flex items-center gap-1">
-                                    <i class="ph-bold ph-calendar-blank"></i> <?= $item['date'] ?? '' ?>
+                                    <i class="ph-bold ph-calendar-blank"></i> <?= esc(date('d M Y', strtotime($item['created_at'] ?? ''))) ?>
                                 </span>
                             </div>
                         </a>
@@ -141,25 +141,6 @@
 <script src="https://unpkg.com/@phosphor-icons/web"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-    // // Tailwind Config Injection (Safety Check)
-    // if (typeof tailwind !== 'undefined') {
-    //     tailwind.config = {
-    //         theme: {
-    //             extend: {
-    //                 colors: {
-    //                     'mind-blue': '#16325C',
-    //                     'mind-blue-light': '#2A5C96',
-    //                     'mind-red': '#ED1C24',
-    //                     'text-secondary': '#4A5568',
-    //                 },
-    //                 fontFamily: {
-    //                     sans: ['Gotham', 'Arial', 'sans-serif'],
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
-
     // Init AOS
     AOS.init({
         duration: 800,

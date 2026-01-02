@@ -85,4 +85,59 @@ document.addEventListener('DOMContentLoaded', function () {
             item.classList.add('active');
         }
     });
+
+    // --- ADVANCED MOBILE MENU LOGIC ---
+    const btn = document.getElementById('mobile-menu-btn');
+    const overlay = document.getElementById('mobile-menu-overlay');
+    const mainHeader = document.getElementById('main-header');
+    const lines = document.querySelectorAll('.line-span');
+    const body = document.body;
+
+    if (btn && overlay && mainHeader && lines.length > 0) {
+        let isOpen = false;
+
+        btn.addEventListener('click', () => {
+            isOpen = !isOpen;
+
+            // Use a class on the body to handle state
+            body.classList.toggle('menu-open', isOpen);
+
+            if (isOpen) {
+                // --- BUKA MENU ---
+                mainHeader.classList.remove('bg-white/95', 'backdrop-blur-lg', 'shadow-sm');
+                mainHeader.classList.add('bg-transparent');
+
+                lines.forEach(line => line.classList.add('bg-white'));
+                lines[0].classList.add('rotate-45', 'translate-y-[9px]', 'w-8');
+                lines[1].classList.add('opacity-0');
+                lines[2].classList.add('-rotate-45', '-translate-y-[9px]', 'w-8');
+                
+                overlay.classList.remove('-translate-y-full');
+                body.classList.add('overflow-hidden', 'no-scrollbar');
+
+                setTimeout(() => {
+                    overlay.classList.add('menu-active');
+                }, 100);
+
+            } else {
+                // --- TUTUP MENU ---
+                setTimeout(() => {
+                    mainHeader.classList.add('bg-white/95', 'backdrop-blur-lg', 'shadow-sm');
+                    mainHeader.classList.remove('bg-transparent');
+                    lines.forEach(line => line.classList.remove('bg-white'));
+                }, 400);
+
+                lines[0].classList.remove('rotate-45', 'translate-y-[9px]', 'w-8');
+                lines[1].classList.remove('opacity-0');
+                lines[2].classList.remove('-rotate-45', '-translate-y-[9px]', 'w-8');
+
+                overlay.classList.remove('menu-active');
+                body.classList.remove('overflow-hidden', 'no-scrollbar');
+                
+                setTimeout(() => {
+                    overlay.classList.add('-translate-y-full');
+                }, 200); 
+            }
+        });
+    }
 });

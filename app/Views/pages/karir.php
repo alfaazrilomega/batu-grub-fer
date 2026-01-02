@@ -54,19 +54,12 @@
 
             <!-- Kolom Kanan: Isi Konten -->
             <div class="w-full lg:w-2/3">
-                <div class="prose max-w-none text-center lg:text-left">
-                    <h3 class="text-2xl md:text-3xl font-bold text-[#16325C] mb-8 leading-snug">
-                        Saat ini tersedia lowongan pekerjaan di <br>lingkungan Grup MIND ID
-                    </h3>
-                    <div class="text-lg leading-relaxed text-gray-700">
-                        <p class="mb-4">Silakan kunjungi portal rekrutmen resmi kami untuk melihat daftar posisi yang dibuka dan melakukan pendaftaran melalui tautan berikut:</p>
-                        <p class="mb-6">Link Portal Rekrutmen Grup MIND ID: 
-                            <a href="https://career.mind.id/" target="_blank" rel="noopener" class="text-blue-700 font-bold hover:underline break-all">
-                                https://career.mind.id
-                            </a>
-                        </p>
-                        <p class="font-bold mt-12 text-gray-800">Seluruh proses rekrutmen MIND ID Group tidak dipungut biaya apa pun.</p>
-                    </div>
+                <div class="prose max-w-none text-center lg:text-left text-lg leading-relaxed text-gray-700">
+                    <?php if (isset($karir_page) && !empty($karir_page['deskripsi_karir_id'])) : ?>
+                        <?= $karir_page['deskripsi_karir_id'] ?>
+                    <?php else : ?>
+                        <p>Informasi karir sedang tidak tersedia saat ini. Silakan periksa kembali nanti.</p>
+                    <?php endif; ?>
                 </div>
             </div>
 
@@ -76,75 +69,50 @@
 
 <!-- 
     CAREER AREAS GRID SECTION
-    Bagian baru untuk menampilkan jalur karir dengan kartu interaktif
+    Bagian ini sekarang dinamis dan mengambil data dari database.
 -->
 <section class="py-16 bg-gray-50 border-t border-gray-200">
     <div class="container mx-auto px-6">
-        <h2 class="text-3xl font-bold text-[#16325C] mb-12 text-center">Jalur Karir Kami</h2>
+        <h2 class="text-3xl font-bold text-[#16325C] mb-12 text-center">Lowongan Pekerjaan</h2>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <?php if (isset($lowongan) && !empty($lowongan)) : ?>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <?php foreach ($lowongan as $job) : ?>
+                    <a href="<?= base_url($locale . '/karir/detail/' . $job['slug_lowongan_id']) ?>" class="group relative aspect-[3/4] overflow-hidden rounded-lg cursor-pointer shadow-md block">
+                        <?php 
+                            $poster_url = !empty($job['poster_lowongan']) 
+                                ? base_url('uploads/lowongan/' . $job['poster_lowongan']) 
+                                : base_url('img/default-job-poster.jpg'); // Fallback image
+                        ?>
+                        <img src="<?= $poster_url ?>" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="<?= $job['nama_lowongan_id'] ?>">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-80"></div>
+                        <div class="absolute bottom-0 left-0 p-6 w-full">
+                            <h3 class="text-white text-xl font-bold mb-2 uppercase tracking-wide"><?= esc($job['nama_lowongan_id']) ?></h3>
+                            <div class="h-1 w-0 bg-[#ED1C24] group-hover:w-16 transition-all duration-500 mb-2"></div>
+                            <div class="flex justify-end opacity-0 group-hover:opacity-100 transition-opacity translate-y-4 group-hover:translate-y-0">
+                                <div class="w-8 h-8 rounded-full bg-white text-[#ED1C24] flex items-center justify-center">
+                                    <i class="ph-bold ph-arrow-right"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                <?php endforeach; ?>
+
+            </div>
+
+            <!-- PAGINATION -->
+            <div class="mt-16">
+                <?= $pager->links('default', 'custom_full') ?>
+            </div>
             
-            <!-- Card 1: Fresh Graduate -->
-            <a href="<?= base_url($locale . '/karir/detail/fresh-graduate') ?>" class="group relative aspect-[3/4] overflow-hidden rounded-lg cursor-pointer shadow-md block">
-                <img src="https://mind.id/storage/190/member-antam.jpg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Fresh Graduate">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-80"></div>
-                <div class="absolute bottom-0 left-0 p-6 w-full">
-                    <h3 class="text-white text-xl font-bold mb-2 uppercase tracking-wide">Fresh Graduate</h3>
-                    <div class="h-1 w-0 bg-[#ED1C24] group-hover:w-16 transition-all duration-500 mb-2"></div>
-                    <div class="flex justify-end opacity-0 group-hover:opacity-100 transition-opacity translate-y-4 group-hover:translate-y-0">
-                        <div class="w-8 h-8 rounded-full bg-white text-[#ED1C24] flex items-center justify-center">
-                            <i class="ph-bold ph-arrow-right"></i>
-                        </div>
-                    </div>
-                </div>
-            </a>
+        <?php else : ?>
+            <div class="text-center py-12 border border-gray-200 rounded-lg">
+                <p class="text-gray-500 text-lg">Saat ini belum ada lowongan pekerjaan yang tersedia.</p>
+                <p class="text-gray-400 mt-2">Silakan cek kembali di lain waktu.</p>
+            </div>
+        <?php endif; ?>
 
-            <!-- Card 2: Professional -->
-            <a href="<?= base_url($locale . '/karir/detail/professional') ?>" class="group relative aspect-[3/4] overflow-hidden rounded-lg cursor-pointer shadow-md block">
-                <img src="https://mind.id/storage/191/member-bukit-asam.jpg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Professional">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-80"></div>
-                <div class="absolute bottom-0 left-0 p-6 w-full">
-                    <h3 class="text-white text-xl font-bold mb-2 uppercase tracking-wide">Professional</h3>
-                    <div class="h-1 w-0 bg-[#ED1C24] group-hover:w-16 transition-all duration-500 mb-2"></div>
-                    <div class="flex justify-end opacity-0 group-hover:opacity-100 transition-opacity translate-y-4 group-hover:translate-y-0">
-                        <div class="w-8 h-8 rounded-full bg-white text-[#ED1C24] flex items-center justify-center">
-                            <i class="ph-bold ph-arrow-right"></i>
-                        </div>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Card 3: Internship -->
-            <a href="<?= base_url($locale . '/karir/detail/internship') ?>" class="group relative aspect-[3/4] overflow-hidden rounded-lg cursor-pointer shadow-md block">
-                <img src="https://mind.id/storage/192/member-freeport.jpg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Internship">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-80"></div>
-                <div class="absolute bottom-0 left-0 p-6 w-full">
-                    <h3 class="text-white text-xl font-bold mb-2 uppercase tracking-wide">Internship</h3>
-                    <div class="h-1 w-0 bg-[#ED1C24] group-hover:w-16 transition-all duration-500 mb-2"></div>
-                    <div class="flex justify-end opacity-0 group-hover:opacity-100 transition-opacity translate-y-4 group-hover:translate-y-0">
-                        <div class="w-8 h-8 rounded-full bg-white text-[#ED1C24] flex items-center justify-center">
-                            <i class="ph-bold ph-arrow-right"></i>
-                        </div>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Card 4: XPLORER Program -->
-            <a href="<?= base_url($locale . '/karir/detail/xplorer') ?>" class="group relative aspect-[3/4] overflow-hidden rounded-lg cursor-pointer shadow-md block">
-                <img src="https://mind.id/storage/193/member-inalum.jpg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="XPLORER Program">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-80"></div>
-                <div class="absolute bottom-0 left-0 p-6 w-full">
-                    <h3 class="text-white text-xl font-bold mb-2 uppercase tracking-wide">XPLORER Program</h3>
-                    <div class="h-1 w-0 bg-[#ED1C24] group-hover:w-16 transition-all duration-500 mb-2"></div>
-                    <div class="flex justify-end opacity-0 group-hover:opacity-100 transition-opacity translate-y-4 group-hover:translate-y-0">
-                        <div class="w-8 h-8 rounded-full bg-white text-[#ED1C24] flex items-center justify-center">
-                            <i class="ph-bold ph-arrow-right"></i>
-                        </div>
-                    </div>
-                </div>
-            </a>
-
-        </div>
     </div>
 </section>
 

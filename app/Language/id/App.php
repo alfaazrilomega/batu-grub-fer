@@ -10,7 +10,7 @@ return [
     'hero3_title' => 'Inovasi Pertambangan untuk Masa Depan',
 
     // Profile Section
-    'profile_heading' => 'Profil',
+    'profile_heading' => 'Nama Perusahaan',
     'profile_text' => 'Mining Industry Indonesia (MIND ID) adalah BUMN Holding Industri Pertambangan yang mengelola sumber daya mineral strategis Indonesia untuk kemakmuran bangsa.',
     'profile_cta' => 'BACA SELANJUTNYA',
 

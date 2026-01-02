@@ -3,7 +3,7 @@
 // app/Language/en/Home.php
 
 return [
-    'logo' => 'Batu Grub',
+    'logo' => 'Batu Group',
     'nav_home' => 'Home',
     'nav_company' => 'Profile Company',
     'nav_members' => 'Members',
@@ -14,11 +14,8 @@ return [
     'hero2_title' => 'Preserving Indonesia\'s Nature',
     'hero3_title' => 'Mining Innovation for the Future',
     'hero_cta' => 'READ MORE <i class=\'ph-bold ph-arrow-right\'></i>',
-    'profile_heading' => 'Profile',
-    'profile_text' => 'Mining Industry Indonesia (MIND ID) is the State-Owned Holding for the Mining Industry that manages Indonesia\'s strategic mineral resources for the nation\'s prosperity.',
     'profile_cta' => 'READ MORE <i class=\'ph-bold ph-arrow-right\'></i>',
     'commodity_heading' => 'Our Commodities',
-    'commodity_text' => 'From aluminum to tin, we mine natural resources for civilization, prosperity, and a brighter future.',
     'comm_aluminium' => 'Aluminum',
     'comm_coal' => 'Coal',
     'comm_gold' => 'Gold',
@@ -44,7 +41,6 @@ return [
     'news3_date' => 'Dec 12, 2025',
     'news3_title' => 'Downstream Expansion, MIND ID Builds a New Smelter',
     'members_heading' => 'Our Members',
-    'members_text' => 'MIND ID is the face of an Indonesia rich in resources and rich in talent from the sons and daughters of Indonesia who are ready to work and synergize to give the best for the country.',
     'career_heading' => 'Work With Us',
     'career_text' => 'Be a part of Indonesia\'s mining industry transformation.',
     'career_cta' => 'JOIN US <i class=\'ph-bold ph-arrow-right\'></i>',

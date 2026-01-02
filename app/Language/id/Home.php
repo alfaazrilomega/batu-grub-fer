@@ -3,7 +3,7 @@
 // app/Language/id/Home.php
 
 return [
-    'logo' => 'Batu Grub',
+    'logo' => 'Batu Group',
     'nav_home' => 'Beranda',
     'nav_company' => 'Profil Perusahaan',
     'nav_members' => 'Anggota',
@@ -14,11 +14,8 @@ return [
     'hero2_title' => 'Menjaga Kelestarian Alam Indonesia',
     'hero3_title' => 'Inovasi Pertambangan untuk Masa Depan',
     'hero_cta' => 'SELANJUTNYA <i class="ph-bold ph-arrow-right"></i>',
-    'profile_heading' => 'Profil',
-    'profile_text' => 'Mining Industry Indonesia (MIND ID) adalah BUMN Holding Industri Pertambangan yang mengelola sumber daya mineral strategis Indonesia untuk kemakmuran bangsa.',
     'profile_cta' => 'BACA SELANJUTNYA <i class="ph-bold ph-arrow-right"></i>',
     'commodity_heading' => 'Komoditas kami',
-    'commodity_text' => 'Dari aluminium hingga timah, kami menambang kekayaan alam untuk peradaban, kemakmuran, dan masa depan yang lebih cerah.',
     'comm_aluminium' => 'Aluminium',
     'comm_coal' => 'Batu Bara',
     'comm_gold' => 'Emas',
@@ -44,7 +41,6 @@ return [
     'news3_date' => '12 Des 2025',
     'news3_title' => 'Ekspansi Hilirisasi, MIND ID Bangun Smelter Baru',
     'members_heading' => 'Anggota Kami',
-    'members_text' => 'MIND ID adalah wajah Indonesia yang kaya akan sumber daya dan kaya akan talenta dari putra-putri Indonesia yang siap berkarya dan bersinergi memberikan yang terbaik bagi negeri.',
     'career_heading' => 'Berkarya Bersama Kami',
     'career_text' => 'Jadilah bagian dari transformasi industri pertambangan Indonesia.',
     'career_cta' => 'BERGABUNG <i class="ph-bold ph-arrow-right"></i>',

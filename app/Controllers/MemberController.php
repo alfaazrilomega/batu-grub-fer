@@ -2,90 +2,36 @@
 
 namespace App\Controllers;
 
+use App\Models\AnggotaModel;
+use App\Models\MetaModel; // Gunakan MetaModel
+
 class MemberController extends BaseController
 {
+    protected $anggotaModel;
+    protected $metaModel; // Tambahkan properti
+
+    public function __construct()
+    {
+        $this->anggotaModel = new AnggotaModel();
+        $this->metaModel = new MetaModel(); // Inisialisasi MetaModel
+    }
+
     public function index()
     {
         $locale = service('request')->getLocale();
 
+        // Mengambil data meta untuk halaman anggota
+        $meta = $this->metaModel->where('slug_meta_id', 'halaman-anggota')->first();
+
+        // Mengambil data anggota dari model dengan paginasi, 6 per halaman
+        $data['members'] = $this->anggotaModel->paginate(6, 'default');
+        $data['pager'] = $this->anggotaModel->pager;
+        
         $data['locale'] = $locale;
         $data['page_title'] = 'Anggota Kami';
-
-        // Data ini diambil dari konten HTML MIND ID.
-        $data['members_description'] = "MIND ID adalah wajah Indonesia yang kaya akan sumber daya dan kaya akan talenta dari putra-putri Indonesia yang siap berkarya dan bersinergi memberikan yang terbaik bagi negeri.";
-
-        $data['members'] = [
-            [
-                'id'    => 'pt-pasifik-resources-indonesia',
-                'name'  => 'PT. Pasifik Resources Indonesia',
-                'logo'  => 'foto-member1.png',
-                'image' => 'foto-hero-section-1.jpg', // Placeholder
-                'url'   => '#', // Placeholder
-                'desc'  => '<p>PT Aneka Tambang Tbk (ANTAM) memiliki 3 segmen usaha yaitu nikel; emas; serta bauksit. Untuk segmen usaha nikel, ANTAM mengelola smelter feronikel di Pomalaa, Sulawesi Tenggara berkapasitas 27.000 ton nikel dalam feronikel (TNI) per tahun.</p>
-                                <p>Pada segmen usaha emas, ANTAM memiliki pabrik pengolahan dan pemurnian logam mulia yang merupakan satu-satunya pabrik pemurnian emas di Indonesia yang memiliki akreditasi Good Delivery List Refiner di London Bullion Market Association (LBMA).</p>
-                                <p>Untuk segmen bauksit, saat ini ANTAM memiliki pabrik pengolahan chemical grade alumina satu-satunya di Indonesia. MIND ID memiliki 65% saham PT Aneka Tambang Tbk.</p>' // Placeholder
-            ],
-            [
-                'id'    => 'pt-batu-energi-timur',
-                'name'  => 'PT. Batu Energi Timur',
-                'logo'  => '', // No logo available
-                'image' => 'foto-hero-section-2.jpg', // Placeholder
-                'url'   => '#', // Placeholder
-                'desc'  => '<p>PT Aneka Tambang Tbk (ANTAM) memiliki 3 segmen usaha yaitu nikel; emas; serta bauksit. Untuk segmen usaha nikel, ANTAM mengelola smelter feronikel di Pomalaa, Sulawesi Tenggara berkapasitas 27.000 ton nikel dalam feronikel (TNI) per tahun.</p>
-                                <p>Pada segmen usaha emas, ANTAM memiliki pabrik pengolahan dan pemurnian logam mulia yang merupakan satu-satunya pabrik pemurnian emas di Indonesia yang memiliki akreditasi Good Delivery List Refiner di London Bullion Market Association (LBMA).</p>
-                                <p>Untuk segmen bauksit, saat ini ANTAM memiliki pabrik pengolahan chemical grade alumina satu-satunya di Indonesia. MIND ID memiliki 65% saham PT Aneka Tambang Tbk.</p>' // Placeholder
-            ],
-            [
-                'id'    => 'pt-batu-halmahera-mineral',
-                'name'  => 'PT Batu Halmahera Mineral',
-                'logo'  => 'foto-member3.png',
-                'image' => 'foto-hero-section-3.jpg', // Placeholder
-                'url'   => '#', // Placeholder
-                'desc'  => '<p>PT Aneka Tambang Tbk (ANTAM) memiliki 3 segmen usaha yaitu nikel; emas; serta bauksit. Untuk segmen usaha nikel, ANTAM mengelola smelter feronikel di Pomalaa, Sulawesi Tenggara berkapasitas 27.000 ton nikel dalam feronikel (TNI) per tahun.</p>
-                                <p>Pada segmen usaha emas, ANTAM memiliki pabrik pengolahan dan pemurnian logam mulia yang merupakan satu-satunya pabrik pemurnian emas di Indonesia yang memiliki akreditasi Good Delivery List Refiner di London Bullion Market Association (LBMA).</p>
-                                <p>Untuk segmen bauksit, saat ini ANTAM memiliki pabrik pengolahan chemical grade alumina satu-satunya di Indonesia. MIND ID memiliki 65% saham PT Aneka Tambang Tbk.</p>' // Placeholder
-            ],
-            [
-                'id'    => 'pt-batu-resources-semesta',
-                'name'  => 'PT Batu Resources Semesta',
-                'logo'  => '', // No logo available
-                'image' => 'background-Report.png', // Placeholder
-                'url'   => '#', // Placeholder
-                'desc'  => '<p>PT Aneka Tambang Tbk (ANTAM) memiliki 3 segmen usaha yaitu nikel; emas; serta bauksit. Untuk segmen usaha nikel, ANTAM mengelola smelter feronikel di Pomalaa, Sulawesi Tenggara berkapasitas 27.000 ton nikel dalam feronikel (TNI) per tahun.</p>
-                                <p>Pada segmen usaha emas, ANTAM memiliki pabrik pengolahan dan pemurnian logam mulia yang merupakan satu-satunya pabrik pemurnian emas di Indonesia yang memiliki akreditasi Good Delivery List Refiner di London Bullion Market Association (LBMA).</p>
-                                <p>Untuk segmen bauksit, saat ini ANTAM memiliki pabrik pengolahan chemical grade alumina satu-satunya di Indonesia. MIND ID memiliki 65% saham PT Aneka Tambang Tbk.</p>' // Placeholder
-            ],
-            [
-                'id'    => 'pt-batu-investment-indonesia',
-                'name'  => 'PT. Batu Investment Indonesia',
-                'logo'  => 'foto-member5.png',
-                'image' => 'foto-berita1.png', // Placeholder
-                'url'   => '#', // Placeholder
-                'desc'  => '<p>PT Aneka Tambang Tbk (ANTAM) memiliki 3 segmen usaha yaitu nikel; emas; serta bauksit. Untuk segmen usaha nikel, ANTAM mengelola smelter feronikel di Pomalaa, Sulawesi Tenggara berkapasitas 27.000 ton nikel dalam feronikel (TNI) per tahun.</p>
-                                <p>Pada segmen usaha emas, ANTAM memiliki pabrik pengolahan dan pemurnian logam mulia yang merupakan satu-satunya pabrik pemurnian emas di Indonesia yang memiliki akreditasi Good Delivery List Refiner di London Bullion Market Association (LBMA).</p>
-                                <p>Untuk segmen bauksit, saat ini ANTAM memiliki pabrik pengolahan chemical grade alumina satu-satunya di Indonesia. MIND ID memiliki 65% saham PT Aneka Tambang Tbk.</p>' // Placeholder
-            ],
-            [
-                'id'    => 'pt-batulak-king-properti',
-                'name'  => 'PT.Batulak King Properti',
-                'logo'  => 'foto-member6.png',
-                'image' => 'foto-berita2.png', // Placeholder
-                'url'   => '#', // Placeholder
-                'desc'  => '<p>PT Aneka Tambang Tbk (ANTAM) memiliki 3 segmen usaha yaitu nikel; emas; serta bauksit. Untuk segmen usaha nikel, ANTAM mengelola smelter feronikel di Pomalaa, Sulawesi Tenggara berkapasitas 27.000 ton nikel dalam feronikel (TNI) per tahun.</p>
-                                <p>Pada segmen usaha emas, ANTAM memiliki pabrik pengolahan dan pemurnian logam mulia yang merupakan satu-satunya pabrik pemurnian emas di Indonesia yang memiliki akreditasi Good Delivery List Refiner di London Bullion Market Association (LBMA).</p>
-                                <p>Untuk segmen bauksit, saat ini ANTAM memiliki pabrik pengolahan chemical grade alumina satu-satunya di Indonesia. MIND ID memiliki 65% saham PT Aneka Tambang Tbk.</p>' // Placeholder
-            ],
-            [
-                'id'    => 'pt-batu-trans-logistik',
-                'name'  => 'PT. Batu Trans Logistik',
-                'logo'  => '', // No logo available
-                'image' => 'foto-berita-mindID.png', // Placeholder
-                'url'   => '#', // Placeholder
-                'desc'  => '<p>PT Aneka Tambang Tbk (ANTAM) memiliki 3 segmen usaha yaitu nikel; emas; serta bauksit. Untuk segmen usaha nikel, ANTAM mengelola smelter feronikel di Pomalaa, Sulawesi Tenggara berkapasitas 27.000 ton nikel dalam feronikel (TNI) per tahun.</p>
-                                <p>Pada segmen usaha emas, ANTAM memiliki pabrik pengolahan dan pemurnian logam mulia yang merupakan satu-satunya pabrik pemurnian emas di Indonesia yang memiliki akreditasi Good Delivery List Refiner di London Bullion Market Association (LBMA).</p>
-                                <p>Untuk segmen bauksit, saat ini ANTAM memiliki pabrik pengolahan chemical grade alumina satu-satunya di Indonesia. MIND ID memiliki 65% saham PT Aneka Tambang Tbk.</p>' // Placeholder
-            ],
-        ];
+        
+        // Menggunakan deskripsi dari database, dengan fallback jika tidak ada
+        $data['members_description'] = $meta['deskripsi_halaman_id'] ?? "Deskripsi untuk halaman anggota belum diatur.";
 
         return view('pages/members', $data);
     }

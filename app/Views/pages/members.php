@@ -31,16 +31,8 @@
     </div>
 </section>
 
-<!-- 
-    SECTION 1: MEMBERS CIRCLE LAYOUT
-    Layout Logic:
-    - Mobile (Default): w-1/2 (2 item per baris)
-    - Tablet (md): w-1/3 (3 item per baris)
-    - Desktop (lg): w-1/4 (4 item per baris)
-    - Parent menggunakan flex-wrap & justify-center agar baris terakhir ke tengah.
--->
+<!-- MEMBERS CIRCLE LAYOUT -->
 <section class="py-20 bg-gray-50 section-fade-in relative">
-    <!-- Decorative Background Element -->
     <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
 
     <div class="container mx-auto px-6">
@@ -48,75 +40,43 @@
         <div class="text-center max-w-3xl mx-auto mb-16">
             <h2 class="text-3xl md:text-4xl font-bold text-mind-blue mb-6"><?= lang('Home.members_heading') ?></h2>
             <p class="text-text-secondary text-lg leading-relaxed">
-                <?= lang('Home.members_text') ?>
+                <?= $members_description ?>
             </p>
             <div class="mt-6 w-24 h-1 bg-mind-red mx-auto rounded-full"></div>
         </div>
 
-        <!-- FLEX LAYOUT: CENTERED & WRAPPED -->
-        <!-- Menggunakan negative margin (-mx-4) untuk mengimbangi padding pada item -->
-        <div class="flex flex-wrap justify-center -mx-4">
-            <?php foreach ($members as $member) : ?>
-                <!-- 
-                    ITEM WRAPPER 
-                    Mengontrol lebar kolom sesuai device
-                -->
-                <div class="w-1/2 md:w-1/3 lg:w-1/4 px-4 mb-8 md:mb-12 flex justify-center">
-                    
-                    <!-- Circle Card -->
-                    <a href="#<?= $member['id'] ?>" class="group relative block w-32 h-32 sm:w-40 sm:h-40 md:w-44 md:h-44 bg-white rounded-full shadow-lg border-4 border-white hover:border-white transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl flex items-center justify-center overflow-hidden shrink-0">
-                        
-                        <!-- Hover Ring Effect -->
-                        <div class="absolute inset-0 rounded-full border-4 border-transparent group-hover:border-mind-blue/10 transition-colors duration-300"></div>
-
-                        <!-- Logo Container -->
-                        <div class="w-3/4 h-3/4 flex items-center justify-center relative z-10 p-2">
-                            <?php if (!empty($member['logo'])) : ?>
-                                <!-- Logo grayscale -> color saat hover -->
-                                <img src="<?= base_url('img/' . $member['logo']) ?>" 
-                                     alt="<?= $member['name'] ?>" 
-                                     class="w-full h-full object-contain filter grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110">
-                            <?php else : ?>
-                                <!-- Fallback Text -->
-                                <div class="text-center text-xs sm:text-sm font-bold text-gray-400 group-hover:text-mind-blue transition-colors leading-tight px-2">
-                                    <?= $member['name'] ?>
-                                </div>
-                            <?php endif; ?>
-                        </div>
-                    </a>
-
-                </div>
-            <?php endforeach; ?>
-        </div>
-    </div>
-</section>
-
-<!-- 
-    SECTION 2: DETAIL LIST (UNCHANGED)
--->
-<section class="py-12 lg:py-24 bg-white">
-    <div class="container mx-auto px-6">
-        
-        <?php foreach ($members as $member) : ?>
-        <div class="pb-12 lg:pt-16 border-b border-gray-200 last:border-0 scroll-mt-24" id="<?= $member['id'] ?>">
-            <div class="w-full h-64 md:h-[400px] bg-gray-100 bg-center bg-no-repeat bg-cover rounded-2xl overflow-hidden mb-8 shadow-lg group" 
-                 style="background-image: url('<?= base_url('img/' . $member['image']) ?>')">
-                 <!-- Overlay tipis -->
-                 <div class="w-full h-full bg-black/10 group-hover:bg-black/0 transition-colors duration-500"></div>
-            </div>
-            <div class="flex flex-wrap md:-mx-6">
-                <div class="w-full md:px-6">
-                    <div class="prose max-w-none mb-8 text-gray-700">
-                        <h2 class="text-3xl font-bold text-mind-blue mb-6 border-l-4 border-red-600 pl-4"><?= $member['name'] ?></h2>
-                        <div class="leading-relaxed text-gray-600 space-y-4 text-justify">
-                           <?= $member['desc'] ?>
+        <?php if (isset($members) && !empty($members)) : ?>
+            <!-- FLEX LAYOUT: CENTERED & WRAPPED -->
+            <div class="flex flex-wrap justify-center -mx-4">
+                <?php foreach ($members as $member) : ?>
+                    <div class="w-1/2 md:w-1/3 lg:w-1/4 px-4 mb-8 md:mb-12 flex justify-center">
+                        <div class="group relative block w-32 h-32 sm:w-40 sm:h-40 md:w-44 md:h-44 bg-white rounded-full shadow-lg border-4 border-white hover:border-white transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl flex items-center justify-center overflow-hidden shrink-0">
+                            <div class="absolute inset-0 rounded-full border-4 border-transparent group-hover:border-mind-blue/10 transition-colors duration-300"></div>
+                            <div class="w-3/4 h-3/4 flex items-center justify-center relative z-10 p-2">
+                                <?php if (!empty($member['logo_anggota'])) : ?>
+                                    <img src="<?= base_url('uploads/anggota/' . $member['logo_anggota']) ?>" 
+                                         alt="<?= $member['nama_perusahaan_anggota'] ?>" 
+                                         class="w-full h-full object-contain filter grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110">
+                                <?php else : ?>
+                                    <div class="text-center text-xs sm:text-sm font-bold text-gray-400 group-hover:text-mind-blue transition-colors leading-tight px-2">
+                                        <?= $member['nama_perusahaan_anggota'] ?>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
                         </div>
                     </div>
-                </div>
+                <?php endforeach; ?>
             </div>
-        </div>
-        <?php endforeach; ?>
 
+            <!-- PAGINATION -->
+            <div class="mt-12">
+                <?= $pager->links('default', 'custom_full') ?>
+            </div>
+        <?php else : ?>
+            <div class="text-center py-12">
+                <p class="text-gray-500">Data anggota tidak ditemukan.</p>
+            </div>
+        <?php endif; ?>
     </div>
 </section>
 

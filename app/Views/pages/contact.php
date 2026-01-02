@@ -14,12 +14,11 @@
             </div>
             
             <h1 class="text-4xl lg:text-6xl font-extrabold mb-6 leading-tight fade-up delay-100 drop-shadow-lg">
-                Mari <br>
-                <span class="text-yellow-500">Terhubung.</span>
+                <?= esc($kontak['judul_kontak_id'] ?? 'Mari Terhubung.') ?>
             </h1>
             
             <p class="text-lg lg:text-xl text-gray-200 mb-8 max-w-2xl fade-up delay-200 leading-relaxed font-light">
-                Kami siap mendengarkan pertanyaan, masukan, dan menjajaki peluang kolaborasi bersama Anda.
+                <?= esc($kontak['subjudul_kontak_id'] ?? 'Kami siap mendengarkan pertanyaan, masukan, dan menjajaki peluang kolaborasi bersama Anda.') ?>
             </p>
             
             <div class="flex items-center text-sm text-gray-400 fade-up delay-300">
@@ -40,9 +39,9 @@
         <!-- Section Title -->
         <div class="text-center mb-12">
             <h1 class="text-3xl lg:text-4xl font-bold text-mind-blue">
-                <?= $lang == 'id' ? $meta['nama_halaman_id'] : $meta['nama_halaman_en']; ?>
+                <?= esc($kontak['judul_kontak_id'] ?? 'Kontak Kami') ?>
             </h1>
-            <p class="text-gray-600 mt-2 text-lg"><?= $lang == 'id' ? $meta['deskripsi_halaman_id'] : $meta['deskripsi_halaman_en']; ?></p>
+            <p class="text-gray-600 mt-2 text-lg"><?= esc($kontak['deskripsi_kontak_id'] ?? 'Hubungi kami untuk pertanyaan lebih lanjut.') ?></p>
         </div>
 
         <!-- Main Grid: Info Kiri, Peta Kanan -->
@@ -51,35 +50,42 @@
             <!-- Kolom Kiri: Info Kontak -->
             <div class="w-full lg:w-2/5">
                 <div class="bg-gray-50 p-8 rounded-lg border h-full">
-                    <h2 class="text-2xl font-bold text-mind-blue mb-6"><?= lang('bahasa.kontak_info_title') ?></h2>
+                    <h2 class="text-2xl font-bold text-mind-blue mb-6">Informasi Kontak</h2>
                     
                     <ul class="space-y-6 text-gray-700">
                         <li class="flex items-start">
                             <i class="ph-fill ph-map-pin-line text-2xl text-mind-blue-light mr-4 mt-1"></i>
                             <div>
                                 <h3 class="font-bold text-lg mb-1">Alamat</h3>
-                                <p class="leading-relaxed"><?= $info['alamat'] ?></p>
+                                <p class="leading-relaxed"><?= esc($kontak['alamat_id'] ?? '') ?></p>
                             </div>
                         </li>
                         <li class="flex items-start">
                             <i class="ph-fill ph-phone text-2xl text-mind-blue-light mr-4 mt-1"></i>
                             <div>
                                 <h3 class="font-bold text-lg mb-1">Telepon</h3>
-                                <p><?= $info['telepon'] ?></p>
+                                <p><?= esc($kontak['telepon'] ?? '') ?></p>
+                            </div>
+                        </li>
+                         <li class="flex items-start">
+                            <i class="ph-fill ph-whatsapp-logo text-2xl text-mind-blue-light mr-4 mt-1"></i>
+                            <div>
+                                <h3 class="font-bold text-lg mb-1">WhatsApp</h3>
+                                <a href="https://wa.me/<?= preg_replace('/[^0-9]/', '', esc($kontak['link_wa'] ?? '')) ?>" target="_blank" class="text-gray-700 hover:text-mind-blue transition-colors"><?= esc($kontak['link_wa'] ?? '') ?></a>
                             </div>
                         </li>
                         <li class="flex items-start">
                             <i class="ph-fill ph-envelope-simple text-2xl text-mind-blue-light mr-4 mt-1"></i>
                             <div>
                                 <h3 class="font-bold text-lg mb-1">Email</h3>
-                                <p><?= $info['email'] ?></p>
+                                 <a href="mailto:<?= esc($kontak['email'] ?? '') ?>" class="text-gray-700 hover:text-mind-blue transition-colors"><?= esc($kontak['email'] ?? '') ?></a>
                             </div>
                         </li>
                         <li class="flex items-start">
                             <i class="ph-fill ph-clock text-2xl text-mind-blue-light mr-4 mt-1"></i>
                             <div>
                                 <h3 class="font-bold text-lg mb-1">Jam Operasional</h3>
-                                <p><?= $info['jam_operasional'] ?></p>
+                                <p><?= esc($kontak['jam_operasional'] ?? '') ?></p>
                             </div>
                         </li>
                     </ul>
