@@ -1,0 +1,15 @@
+CRITICAL - 2026-01-03 05:50:54 --> ErrorException: Undefined array key "slug_komoditas_id"
+[Method: GET, Route: id]
+in APPPATH\Views\pages\home.php on line 144.
+ 1 APPPATH\Views\pages\home.php(144): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "slug_komoditas_id"', 'D:\\xamp1\\htdocs\\ci-mind\\app\\Views\\pages\\home.php', 144)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\xamp1\\htdocs\\ci-mind\\app\\Views\\pages\\home.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1199): CodeIgniter\View\View->render('pages/home', [], true)
+ 5 APPPATH\Controllers\Home.php(73): view('pages/home', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\xamp1\\htdocs\\ci-mind\\public\\index.php')

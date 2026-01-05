@@ -24,13 +24,17 @@ class MemberController extends BaseController
         $meta = $this->metaModel->where('slug_meta_id', 'halaman-anggota')->first();
 
         // Mengambil semua data anggota dari model
-        $data['members'] = $this->anggotaModel->findAll();
+        $members = $this->anggotaModel->findAll();
         
-        $data['locale'] = $locale;
-        $data['page_title'] = 'Anggota Kami';
-        
-        // Menggunakan deskripsi dari database, dengan fallback jika tidak ada
-        $data['members_description'] = $meta['deskripsi_halaman_id'] ?? "Deskripsi untuk halaman anggota belum diatur.";
+        // Menggunakan deskripsi dari database, dengan fallback yang aman jika tidak ada
+        $description = ($meta) ? $meta['deskripsi_halaman_id'] : "Deskripsi untuk halaman anggota belum diatur.";
+
+        $data = [
+            'members' => $members,
+            'locale' => $locale,
+            'page_title' => 'Anggota Kami',
+            'members_description' => $description,
+        ];
 
         return view('pages/members', $data);
     }

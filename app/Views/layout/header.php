@@ -75,7 +75,7 @@ $currentPage = $uri->getSegment(2, 'home'); // default to 'home' if segment 2 is
     <!-- Footer Info di Menu -->
     <div class="nav-item mt-auto border-t border-white/10 pt-6 container mx-auto">
         <div class="flex flex-col md:flex-row items-center justify-between text-white/50 text-sm gap-4">
-            <p>MIND ID Head Office - Jakarta</p>
+            <p>Batu Group</p>
             <div class="flex gap-6 text-white">
                 <a href="#" class="hover:text-mind-red transition"><i class="ph-fill ph-instagram-logo text-2xl"></i></a>
                 <a href="#" class="hover:text-mind-red transition"><i class="ph-fill ph-linkedin-logo text-2xl"></i></a>

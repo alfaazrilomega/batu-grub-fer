@@ -19,10 +19,26 @@ class Berita extends BaseController
      */
     public function index()
     {
+        // 1. Ambil artikel terbaru sebagai Featured Article
+        $featuredArticle = $this->artikelModel->orderBy('created_at', 'DESC')->first();
+
+        // 2. Siapkan query untuk artikel terbaru (Latest Articles)
+        $latestArticlesQuery = $this->artikelModel->orderBy('created_at', 'DESC');
+
+        // 3. Jika ada featured article, kecualikan dari daftar latest articles
+        if ($featuredArticle) {
+            // Asumsi primary key adalah 'id_artikel'. Sesuaikan jika berbeda.
+            $latestArticlesQuery->where('id_artikel !=', $featuredArticle['id_artikel']);
+        }
+
+        // 4. Lakukan paginasi pada sisa artikel
+        $latestArticles = $latestArticlesQuery->paginate(9, 'default');
+
         $data = [
-            'locale'  => $this->request->getLocale(),
-            'artikel' => $this->artikelModel->orderBy('created_at', 'DESC')->paginate(9, 'default'),
-            'pager'   => $this->artikelModel->pager,
+            'locale'           => $this->request->getLocale(),
+            'featured_article' => $featuredArticle,
+            'latest_articles'  => $latestArticles,
+            'pager'            => $this->artikelModel->pager,
         ];
 
         return view('pages/berita', $data);
@@ -55,7 +71,7 @@ class Berita extends BaseController
 
         $data = [
             'locale'           => $this->request->getLocale(),
-            'title'            => $artikel['title_artikel_id'], // Asumsi nama kolom title
+            'title'            => $artikel['judul_artikel_id'], // Menggunakan nama kolom yang benar
             'artikel'          => $artikel,
             'related_articles' => $related_articles
         ];

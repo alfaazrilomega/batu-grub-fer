@@ -24,7 +24,7 @@
             
             <h1 class="text-4xl lg:text-6xl font-extrabold mb-6 leading-tight fade-up delay-100 drop-shadow-lg">
                 Kabar Terkini <br>
-                <span class="text-yellow-500">dari MIND ID.</span>
+                <span class="text-yellow-500">dari Batu Group.</span>
             </h1>
             
             <p class="text-lg lg:text-xl text-gray-200 mb-8 max-w-2xl fade-up delay-200 leading-relaxed font-light">
@@ -46,51 +46,92 @@
 -->
 <main class="py-16 lg:py-24 bg-gray-50">
     <div class="container mx-auto px-6">
-        
-        <h2 class="text-[#16325C] font-bold text-2xl md:text-3xl mb-8 lg:mb-12 uppercase tracking-wide border-l-4 border-[#ED1C24] pl-4">
-            Semua Berita
-        </h2>
-
-        <?php if (!empty($artikel)) : ?>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <?php foreach($artikel as $index => $item): ?>
-                <a href="<?= site_url($locale . '/berita/' . ($item['slug_artikel_id'] ?? '#')) ?>" 
-                   class="group flex flex-col bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 h-full">
-                    
-                    <div class="relative h-48 overflow-hidden">
-                        <img src="<?= base_url('uploads/artikel/' . esc($item['foto_artikel'])) ?>" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="<?= esc($item['alt_artikel_id']) ?>">
+        <div class="w-full">
+            
+            <!-- FEATURED ARTICLE -->
+            <?php if (!empty($featured)): ?>
+            <div class="mb-12 lg:mb-16" data-aos="fade-up">
+                <h2 class="text-[#16325C] font-bold text-lg mb-6 uppercase tracking-wide border-l-4 border-[#ED1C24] pl-4">
+                    Berita Utama
+                </h2>
+                
+                <a href="<?= site_url($locale . '/berita/' . ($featured['slug_artikel_id'] ?? '#')) ?>" class="group block bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100">
+                    <div class="relative h-64 md:h-96 w-full overflow-hidden">
+                        <img src="<?= base_url('img/' . esc($featured['foto_artikel'])) ?>" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                             alt="<?= esc($featured['alt_artikel_id'] ?? 'Featured Image') ?>">
                     </div>
                     
-                    <div class="p-5 flex flex-col flex-grow">
-                        <div class="text-xs text-gray-400 mb-2 flex items-center gap-2">
-                            <i class="ph-bold ph-calendar-blank"></i> <?= esc(date('d M Y', strtotime($item['created_at']))) ?>
+                    <div class="p-6 md:p-8">
+                        <div class="flex items-center text-sm text-gray-500 mb-3 gap-3">
+                            <span class="flex items-center gap-1">
+                                <i class="ph-bold ph-calendar-blank"></i> <?= esc(date('d M Y', strtotime($featured['created_at']))) ?>
+                            </span>
                         </div>
-                        <h3 class="text-lg font-bold text-[#16325C] mb-3 leading-snug group-hover:text-[#ED1C24] transition-colors line-clamp-2">
-                            <?= esc($item['judul_artikel_id']) ?>
+                        
+                        <h3 class="text-2xl md:text-3xl font-bold text-[#16325C] mb-4 group-hover:text-[#ED1C24] transition-colors leading-tight">
+                            <?= esc($featured['judul_artikel_id']) ?>
                         </h3>
-                        <p class="text-gray-600 text-sm leading-relaxed line-clamp-3 mb-4">
-                            <?= esc($item['snippet_id']) ?>
+                        
+                        <p class="text-gray-600 leading-relaxed mb-6 line-clamp-3">
+                            <?= esc($featured['snippet_id']) ?>
                         </p>
-                        <div class="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between text-xs font-medium text-gray-500">
-                            <span>Baca Artikel</span>
-                            <i class="ph-bold ph-caret-right text-[#ED1C24]"></i>
-                        </div>
+                        
+                        <span class="inline-flex items-center text-[#16325C] font-bold text-sm uppercase tracking-wide group-hover:underline">
+                            Baca Selengkapnya <i class="ph-bold ph-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                        </span>
                     </div>
                 </a>
-                <?php endforeach; ?>
             </div>
+            <?php endif; ?>
 
-            <!-- PAGINATION -->
-            <div class="mt-12 lg:mt-16">
-                <?= $pager->links('default', 'custom_full') ?>
+            <!-- LATEST ARTICLES GRID -->
+            <?php if (!empty($latest)): ?>
+            <div>
+                <h2 class="text-[#16325C] font-bold text-lg mb-6 uppercase tracking-wide border-l-4 border-[#ED1C24] pl-4">
+                    Berita Terbaru
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <?php foreach($latest as $index => $item): ?>
+                    <a href="<?= site_url($locale . '/berita/' . ($item['slug_artikel_id'] ?? '#')) ?>" 
+                       class="group flex flex-col bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 h-full" 
+                       data-aos="fade-up" data-aos-delay="<?= ($index % 3) * 100 ?>">
+                        
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="<?= base_url('img/' . esc($item['foto_artikel'])) ?>" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="<?= esc($item['alt_artikel_id']) ?>">
+                        </div>
+                        
+                        <div class="p-5 flex flex-col flex-grow">
+                            <div class="text-xs text-gray-400 mb-2 flex items-center gap-2">
+                                <i class="ph-bold ph-calendar-blank"></i> <?= esc(date('d M Y', strtotime($item['created_at']))) ?>
+                            </div>
+                            <h3 class="text-lg font-bold text-[#16325C] mb-3 leading-snug group-hover:text-[#ED1C24] transition-colors line-clamp-2">
+                                <?= esc($item['judul_artikel_id']) ?>
+                            </h3>
+                            <div class="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between text-xs font-medium text-gray-500">
+                                <span>Baca Artikel</span>
+                                <i class="ph-bold ph-caret-right text-[#ED1C24]"></i>
+                            </div>
+                        </div>
+                    </a>
+                    <?php endforeach; ?>
+
+                </div>
+                
+                <!-- PAGINATION -->
+                <div class="mt-12 lg:mt-16">
+                    <?= $pager->links('default', 'custom_full') ?>
+                </div>
             </div>
-
-        <?php else : ?>
+            <?php else: ?>
             <div class="text-center py-16">
-                <p class="text-gray-500">Saat ini belum ada berita yang tersedia.</p>
+                <p class="text-gray-500">Saat ini belum ada berita terbaru yang tersedia.</p>
             </div>
-        <?php endif; ?>
+            <?php endif; ?>
 
+        </div>
     </div>
 </main>
 

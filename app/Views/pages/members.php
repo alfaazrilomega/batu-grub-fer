@@ -19,7 +19,7 @@
             </h1>
             
             <p class="text-lg lg:text-xl text-gray-200 mb-8 max-w-2xl fade-up delay-200 leading-relaxed font-light">
-                Mengenal lebih dekat pilar-pilar yang membentuk Grup MIND ID, dari Sabang sampai Merauke.
+                Mengenal lebih dekat pilar-pilar yang membentuk Grup Batu Group, dari Sabang sampai Merauke.
             </p>
             
             <div class="flex items-center text-sm text-gray-400 fade-up delay-300">

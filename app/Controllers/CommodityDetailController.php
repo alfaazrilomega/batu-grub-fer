@@ -29,7 +29,7 @@ class CommodityDetailController extends BaseController
         // Siapkan data untuk dikirim ke view
         $data = [
             'locale'    => $locale,
-            'hero_bg'   => base_url('uploads/komoditas/' . $commodityData['foto_komoditas']),
+            'hero_bg'   => base_url('img/' . $commodityData['foto_komoditas']),
             'commodity' => [
                 'title'   => $commodityData['nama_komoditas_id'],
                 'content' => $commodityData['deskripsi_komoditas_id'],

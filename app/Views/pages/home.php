@@ -53,17 +53,11 @@
     </section>
 
     <!-- 2. PROFILE SECTION (UPDATED: VIDEO YOUTUBE) -->
-    <section class="py-20 md:py-28 bg-dark-navy text-white section-fade-in">
+    <section class="py-20 md:py-28 bg-[#0a2540] text-white section-fade-in"> 
         <div class="container mx-auto px-6">
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 
-                <!-- VIDEO CONTAINER -->
-                <!-- Menggunakan layout yang sama seperti di profil.php -->
                 <div class="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl border-4 border-white/10 group bg-black">
-                     <!-- 
-                        YOUTUBE IFRAME
-                        Ganti src dengan ID Video yang diinginkan
-                     -->
                      <iframe class="absolute inset-0 w-full h-full" 
                             src="<?= esc($tentang['link_youtube'] ?? 'https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0') ?>" 
                             title="Company Profile" 
@@ -73,12 +67,60 @@
                     </iframe>
                 </div>
 
-                <!-- TEXT CONTENT -->
                 <div>
-                    <h2 class="text-4xl font-bold"><?= esc($tentang['nama_perusahaan'] ?? '') ?></h2>
-                    <p class="mt-4 text-lg text-gray-300"><?= esc($tentang['deskripsi_tentang_id'] ?? '') ?></p>
+                    <h2 class="text-4xl font-bold text-white mb-6 leading-tight">
+                        <?= esc($tentang['nama_perusahaan'] ?? 'Batu Group') ?>
+                    </h2>
+                    
+                    <div class="mt-4 
+                        /* 1. Style Paragraf Biasa */
+                        [&>p]:text-lg 
+                        [&>p]:text-gray-300 
+                        [&>p]:leading-relaxed 
+                        [&>p]:mb-6 
+                        
+                        /* 2. Style BOLD (Kata Penting) -> Warna Emas */
+                        [&_strong]:text-yellow-400 
+                        [&_strong]:font-extrabold 
+                        [&_strong]:tracking-wide
+                        
+                        /* 3. Style ITALIC (Miring) -> Warna Putih Terang & Font Serif */
+                        [&_em]:text-white
+                        [&_em]:font-serif
+                        [&_em]:italic
+                        [&_em]:tracking-wide
+                        [&_em]:decoration-wavy
+
+                        /* 4. Style QUOTES (Kutipan Visi) */
+                        [&>blockquote]:relative
+                        [&>blockquote]:pl-10 
+                        [&>blockquote]:py-4
+                        [&>blockquote]:my-8
+                        [&>blockquote]:border-l-4 
+                        [&>blockquote]:border-red-600 
+                        [&>blockquote]:text-xl 
+                        [&>blockquote]:text-gray-100 
+                        [&>blockquote]:font-serif 
+                        [&>blockquote]:italic
+                        [&>blockquote]:bg-white/5 
+                        [&>blockquote]:rounded-r-xl
+                        [&>blockquote]:pr-6
+                        
+                        
+                        [&>blockquote]:before:content-['\201C']
+                        [&>blockquote]:before:absolute
+                        [&>blockquote]:before:-top-2
+                        [&>blockquote]:before:left-3
+                        [&>blockquote]:before:text-6xl
+                        [&>blockquote]:before:text-yellow-500
+                        [&>blockquote]:before:opacity-30
+                        [&>blockquote]:before:font-serif
+                    ">
+                        <?= $tentang['deskripsi_tentang_id'] ?? '' ?>
+                    </div>
+
                     <a href="<?= site_url($locale . '/profil-perusahaan') ?>"
-                        class="mt-8 inline-flex items-center gap-3 bg-mind-red text-white font-bold py-3 px-8 rounded-full hover:bg-red-700 transition-colors">
+                        class="mt-4 inline-flex items-center gap-3 bg-[#ED1C24] text-white font-bold py-3 px-8 rounded-full hover:bg-red-700 transition-all shadow-lg hover:shadow-red-900/50 hover:-translate-y-1">
                         <?= lang('Home.profile_cta') ?>
                     </a>
                 </div>
@@ -100,7 +142,7 @@
                 <?php if (!empty($commodities)) : ?>
                     <?php foreach ($commodities as $commodity) : ?>
                         <a href="<?= site_url($locale . '/komoditas/' . $commodity['slug_id']) ?>" class="group relative aspect-[3/4] overflow-hidden rounded-lg cursor-pointer shadow-md block">
-                            <img src="<?= base_url('uploads/komoditas/' . esc($commodity['foto_komoditas'])) ?>"
+                            <img src="<?= base_url('img/' . esc($commodity['foto_komoditas'])) ?>"
                                 alt="<?= esc($commodity['alt_komoditas_id']) ?>"
                                 class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                             <div
@@ -139,7 +181,7 @@
                     <?php foreach ($news as $article) : ?>
                         <div class="bg-white rounded-xl shadow-sm hover:shadow-xl transition-shadow overflow-hidden group h-full flex flex-col">
                             <div class="h-56 overflow-hidden">
-                                <img src="<?= base_url('uploads/artikel/' . esc($article['foto_artikel'])) ?>" alt="<?= esc($article['alt_artikel_id']) ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <img src="<?= base_url('img/' . esc($article['foto_artikel'])) ?>" alt="<?= esc($article['alt_artikel_id']) ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                             </div>
                             <div class="p-8 flex-1 flex flex-col">
                                 <span class="text-xs text-gray-500 font-bold uppercase tracking-wider mb-2"><?= esc(date('d M Y', strtotime($article['created_at']))) ?></span>
@@ -185,7 +227,7 @@
                                 <!-- Logo Container -->
                                 <div class="w-3/4 h-3/4 flex items-center justify-center relative z-10 p-2">
                                     <?php if (!empty($member['logo_anggota'])) : ?>
-                                        <img src="<?= base_url('uploads/anggota/' . esc($member['logo_anggota'])) ?>" 
+                                        <img src="<?= base_url('img/' . esc($member['logo_anggota'])) ?>" 
                                              alt="<?= esc($member['nama_perusahaan_anggota']) ?>" 
                                              class="w-full h-full object-contain filter grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110">
                                     <?php else : ?>

@@ -82,7 +82,7 @@
                     <a href="<?= base_url($locale . '/karir/detail/' . $job['slug_lowongan_id']) ?>" class="group relative aspect-[3/4] overflow-hidden rounded-lg cursor-pointer shadow-md block">
                         <?php 
                             $poster_url = !empty($job['poster_lowongan']) 
-                                ? base_url('uploads/lowongan/' . $job['poster_lowongan']) 
+                                ? base_url('img/' . $job['poster_lowongan']) 
                                 : base_url('img/default-job-poster.jpg'); // Fallback image
                         ?>
                         <img src="<?= $poster_url ?>" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="<?= $job['nama_lowongan_id'] ?>">

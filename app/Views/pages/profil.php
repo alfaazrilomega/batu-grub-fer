@@ -2,16 +2,10 @@
 
 <?= $this->section('content') ?>
 
-<!-- Chosen Palette: Corporate Navy & Gold (GESID Identity) -->
-<!-- Bootstrap Icons -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
     
-    .profil-page-content { 
-        font-family: 'Inter', sans-serif;
-    }
+    .profil-page-content { font-family: 'Inter', sans-serif; }
     
     .fade-up { 
         opacity: 0; 
@@ -30,11 +24,58 @@
         background-position: center;
         background-repeat: no-repeat;
     }
+
+    /* --- PERBAIKAN LOGIC ANGKA MISI (FIXED) --- */
+    /* Kita gunakan CSS Murni agar counter pasti jalan */
+    .misi-content ul {
+        list-style: none;
+        padding: 0;
+        counter-reset: misi-counter; /* Reset penghitung */
+    }
+    .misi-content ul li {
+        position: relative;
+        padding-left: 3.5rem; /* Jarak teks dari angka */
+        margin-bottom: 1.5rem;
+        counter-increment: misi-counter; /* Tambah angka setiap baris */
+        display: flex;
+        flex-direction: column;
+    }
+    /* Lingkaran Angka */
+    .misi-content ul li::before {
+        content: counter(misi-counter); /* Tampilkan Angka 1, 2, 3... */
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 2.5rem;  /* w-10 */
+        height: 2.5rem; /* h-10 */
+        background-color: #374151; /* gray-700 */
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 0.875rem;
+        color: white;
+        transition: all 0.3s ease;
+    }
+    /* Efek Hover Lingkaran */
+    .misi-content ul li:hover::before {
+        background-color: #EAB308; /* yellow-500 */
+        color: #1e3a8a; /* blue-900 (Navy) */
+    }
+    /* Styling Teks List */
+    .misi-content ul li {
+        color: #d1d5db; /* gray-300 */
+        font-size: 1.125rem; /* text-lg */
+    }
+    .misi-content ul li strong {
+        color: white;
+        display: block;
+    }
 </style>
 
 <div class="profil-page-content bg-gray-50 text-gray-800">
 
-    <!-- HERO SECTION -->
     <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden hero-bg text-white">
         <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-transparent z-10"></div>
         <div class="absolute -right-20 top-20 w-96 h-96 bg-yellow-500 rounded-full opacity-10 blur-3xl z-0"></div>
@@ -46,12 +87,12 @@
                 </div>
                 
                 <h1 class="text-4xl lg:text-6xl font-extrabold mb-6 leading-tight fade-up delay-100 drop-shadow-lg">
-                    <?= $profil['nama_perusahaan'] ?? 'MIND ID Group' ?>
+                    <?= esc($profil['nama_perusahaan'] ?? 'Batu Group') ?>
                 </h1>
                 
-                <?php if (isset($profil['snippet_id']) && !empty($profil['snippet_id'])) : ?>
+                <?php if (!empty($profil['snippet_id'])) : ?>
                 <p class="text-lg lg:text-xl text-gray-200 mb-8 max-w-2xl fade-up delay-200 leading-relaxed font-light">
-                    <?= $profil['snippet_id'] ?>
+                    <?= esc($profil['snippet_id']) ?>
                 </p>
                 <?php endif; ?>
                 
@@ -64,8 +105,7 @@
         </div>
     </section>
 
-    <?php if (isset($profil) && !empty($profil)) : ?>
-        <!-- INTRO SECTION -->
+    <?php if (!empty($profil)) : ?>
         <section class="py-20 lg:py-24 bg-white overflow-hidden">
             <div class="container mx-auto px-6">
                 <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -75,12 +115,12 @@
                         <h3 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">Generasi Penggerak Perubahan</h3>
                         
                         <div class="prose text-gray-600 leading-relaxed text-lg text-justify mb-8">
-                            <?= $profil['deskripsi_tentang_id'] ?>
+                            <?= $profil['deskripsi_tentang_id'] ?? '' ?>
                         </div>
                         
                         <div class="inline-block border-l-4 border-yellow-500 pl-6 py-2 bg-yellow-50 rounded-r-lg text-left shadow-sm">
                             <p class="text-xl font-light italic text-gray-800">
-                                <?= $profil['visi_id'] ?>
+                                "<?= esc($profil['visi_id'] ?? 'Menjadi Perusahaan Global Berkelanjutan') ?>"
                             </p>
                             <p class="text-sm font-bold mt-2 text-gray-500">— Visi Perusahaan</p>
                         </div>
@@ -89,7 +129,7 @@
                     <div class="fade-up delay-100 relative">
                         <div class="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl border-4 border-white group bg-black">
                             <iframe class="absolute inset-0 w-full h-full" 
-                                    src="<?= $profil['link_youtube'] ?>" 
+                                    src="<?= esc($profil['link_youtube'] ?? '') ?>" 
                                     title="Company Profile" 
                                     frameborder="0" 
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
@@ -104,7 +144,6 @@
             </div>
         </section>
 
-        <!-- VISI & MISI -->
         <section class="py-24 bg-gray-900 text-white relative overflow-hidden">
             <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
                 <div class="absolute right-0 bottom-0 w-96 h-96 bg-blue-500 rounded-full blur-[120px]"></div>
@@ -118,15 +157,16 @@
                         <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-yellow-500/10 to-transparent rounded-bl-full"></div>
                         <h4 class="text-yellow-500 font-bold uppercase tracking-widest mb-6 text-sm">Visi Kami</h4>
                         <p class="text-3xl lg:text-4xl text-white font-serif italic leading-snug">
-                           "<?= $profil['visi_id'] ?>"
+                           "<?= esc($profil['visi_id'] ?? 'Visi tidak tersedia') ?>"
                         </p>
                         <div class="w-16 h-1 bg-gray-600 mx-auto mt-8 group-hover:bg-yellow-500 transition-colors duration-300"></div>
                     </div>
 
                     <div class="group bg-gray-800 p-10 lg:p-14 rounded-3xl border border-gray-700 hover:border-yellow-500 transition-all duration-300 hover:shadow-2xl hover:shadow-yellow-500/10 fade-up delay-100 h-full flex flex-col justify-center">
                         <h4 class="text-yellow-500 font-bold uppercase tracking-widest mb-8 text-sm text-center md:text-left">Misi Kami</h4>
-                        <div class="prose prose-invert text-gray-300">
-                            <?= $profil['misi_id'] ?>
+                        
+                        <div class="misi-content prose prose-invert max-w-none">
+                            <?= $profil['misi_id'] ?? '' ?>
                         </div>
                     </div>
 
@@ -134,7 +174,6 @@
             </div>
         </section>
 
-        <!-- STRUCTURE MEMBER SECTION -->
         <section class="py-20 lg:py-24 bg-gray-50">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12 fade-up">
@@ -145,11 +184,10 @@
                 </div>
 
                 <div class="relative w-full shadow-2xl rounded-2xl overflow-hidden border-4 border-white bg-white fade-up delay-100">
-                    <img src="<?= base_url('uploads/tentang/' . $profil['struktur_organisasi']) ?>" 
+                    <img src="<?= base_url('img/' . ($profil['struktur_organisasi'] ?? 'default-structure.png')) ?>" 
                          alt="Struktur Perusahaan" 
                          class="w-full h-auto object-contain">
                 </div>
-
             </div>
         </section>
     <?php else : ?>
@@ -165,7 +203,6 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const elementsToAnimate = document.querySelectorAll('.profil-page-content .fade-up');
-
         if (elementsToAnimate.length > 0) {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -174,10 +211,7 @@
                     }
                 });
             }, { threshold: 0.1 });
-
-            elementsToAnimate.forEach(el => {
-                observer.observe(el);
-            });
+            elementsToAnimate.forEach(el => observer.observe(el));
         }
     });
 </script>

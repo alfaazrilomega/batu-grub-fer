@@ -18,7 +18,7 @@
             <div class="md:col-span-2 lg:col-span-1">
                 <a href="#" class="flex items-center gap-2 text-2xl font-extrabold text-white">
                     <span class="logo-cover"></span>
-                    <span data-i18n="logo">MIND ID</span>
+                    <span data-i18n="logo">Batu Group</span>
                 </a>
                 <p class="mt-4 text-gray-300/80 text-sm" data-i18n="footer_address">Gedung Energy, 17th Floor,
                     SCBD, Jakarta Selatan 12190, Indonesia</p>
@@ -58,7 +58,7 @@
             </div>
         </div>
         <div class="mt-16 border-t border-white/10 pt-8 text-center text-sm text-gray-400">
-            <p data-i18n="footer_copyright">&copy; 2025 MIND ID. All Rights Reserved.</p>
+            <p data-i18n="footer_copyright">&copy; 2025 Batu Group. All Rights Reserved.</p>
         </div>
     </div>
 </footer>

@@ -11,7 +11,7 @@ return [
 
     // Profile Section
     'profile_heading' => 'Nama Perusahaan',
-    'profile_text' => 'Mining Industry Indonesia (MIND ID) adalah BUMN Holding Industri Pertambangan yang mengelola sumber daya mineral strategis Indonesia untuk kemakmuran bangsa.',
+    'profile_text' => 'Mining Industry Indonesia (Batu Group) adalah BUMN Holding Industri Pertambangan yang mengelola sumber daya mineral strategis Indonesia untuk kemakmuran bangsa.',
     'profile_cta' => 'BACA SELANJUTNYA',
 
     // Commodity Section
@@ -26,16 +26,16 @@ return [
     'news_heading' => 'Berita Terbaru',
     'news_all' => 'SEMUA BERITA',
     'news1_date' => '18 Des 2025',
-    'news1_title' => 'MIND ID Dorong Inovasi Digital di Sektor Pertambangan',
+    'news1_title' => 'Batu Group Dorong Inovasi Digital di Sektor Pertambangan',
     'news_cta' => 'Selengkapnya',
     'news2_date' => '15 Des 2025',
-    'news2_title' => 'Program Pemberdayaan Masyarakat MIND ID Raih Penghargaan',
+    'news2_title' => 'Program Pemberdayaan Masyarakat Batu Group Raih Penghargaan',
     'news3_date' => '12 Des 2025',
     'news3_title' => 'Ekspansi Hilirisasi: Smelter Baru Siap Beroperasi',
 
     // Members Section
     'members_heading' => 'Anggota Kami',
-    'members_text' => 'MIND ID adalah wajah Indonesia yang kaya akan sumber daya dan kaya akan talenta dari putra-putri Indonesia yang siap berkarya dan bersinergi memberikan yang terbaik bagi negeri.',
+    'members_text' => 'Batu Group adalah wajah Indonesia yang kaya akan sumber daya dan kaya akan talenta dari putra-putri Indonesia yang siap berkarya dan bersinergi memberikan yang terbaik bagi negeri.',
 
     // Career Banner
     'career_heading' => 'Berkarya Bersama Kami',

@@ -24,7 +24,9 @@
             <div class="flex items-center text-sm text-gray-400 fade-up delay-300">
                 <a href="<?= site_url($locale) ?>" class="hover:text-white transition">Beranda</a>
                 <span class="mx-2">/</span>
-                <span class="text-yellow-500">Kontak</span>
+                <span class="text-yellow-500">
+                    
+                </span>
             </div>
         </div>
     </div>
@@ -95,7 +97,7 @@
             <!-- Kolom Kanan: Peta -->
             <div class="w-full lg:w-3/5">
                 <div class="w-full h-[500px] bg-gray-200 rounded-lg overflow-hidden border">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.525694167994!2d112.61282937401006!3d-7.9445006920797265!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e78827489ab9d67%3A0xcad03ec85e51098!2sJl.%20Simpang%20Remujung%20No.3%2C%20Jatimulyo%2C%20Kec.%20Lowokwaru%2C%20Kota%20Malang%2C%20Jawa%20Timur%2065141!5e0!3m2!1sid!2sid!4v1739112900065!5m2!1sid!2sid" class="w-full h-full" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.451657554165!2d106.8570659!3d-6.203997299999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f5680fbdf26d%3A0x617060acafb5c140!2sDETIK%20Indonesia!5e0!3m2!1sid!2sid!4v1767422136340!5m2!1sid!2sid" class="w-full h-full" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade""></iframe>
                 </div>
             </div>
 
