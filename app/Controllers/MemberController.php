@@ -3,17 +3,17 @@
 namespace App\Controllers;
 
 use App\Models\AnggotaModel;
-use App\Models\MetaModel; // Gunakan MetaModel
+use App\Models\MetaModel;
 
 class MemberController extends BaseController
 {
     protected $anggotaModel;
-    protected $metaModel; // Tambahkan properti
+    protected $metaModel;
 
     public function __construct()
     {
         $this->anggotaModel = new AnggotaModel();
-        $this->metaModel = new MetaModel(); // Inisialisasi MetaModel
+        $this->metaModel = new MetaModel();
     }
 
     public function index()
@@ -21,19 +21,19 @@ class MemberController extends BaseController
         $locale = service('request')->getLocale();
 
         // Mengambil data meta untuk halaman anggota
-        $meta = $this->metaModel->where('slug_meta_id', 'halaman-anggota')->first();
+        $metaData = $this->metaModel->where('slug_meta_id', 'members')->first();
 
         // Mengambil semua data anggota dari model
         $members = $this->anggotaModel->findAll();
-        
-        // Menggunakan deskripsi dari database, dengan fallback yang aman jika tidak ada
-        $description = ($meta) ? $meta['deskripsi_halaman_id'] : "Deskripsi untuk halaman anggota belum diatur.";
 
         $data = [
-            'members' => $members,
-            'locale' => $locale,
-            'page_title' => 'Anggota Kami',
-            'members_description' => $description,
+            'locale'        => $locale,
+            'members'       => $members,
+            'meta_title'    => $metaData['title_id'] ?? 'Anggota Kami',
+            'meta_desc'     => $metaData['meta_desc_id'] ?? 'Lihat daftar anggota yang menjadi bagian dari jaringan kami.',
+            // Deskripsi ini bisa digunakan di dalam view jika diperlukan
+            'page_description' => $metaData['deskripsi_halaman_id'] ?? 'Deskripsi untuk halaman anggota belum diatur.',
+            'canonical_url' => base_url($locale . '/members'),
         ];
 
         return view('pages/members', $data);

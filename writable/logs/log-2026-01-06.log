@@ -1,0 +1,143 @@
+INFO - 2026-01-06 03:45:45 --> REDIRECTED ROUTE at http://localhost:8080/id
+ERROR - 2026-01-06 03:46:06 --> Error connecting to the database: mysqli_sql_exception: No connection could be made because the target machine actively refused it in D:\xamp1\htdocs\ci-mind\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 D:\xamp1\htdocs\ci-mind\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'batugrub', 3306, '', 0)
+#1 D:\xamp1\htdocs\ci-mind\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 D:\xamp1\htdocs\ci-mind\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 D:\xamp1\htdocs\ci-mind\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\xamp1\htdocs\ci-mind\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\xamp1\htdocs\ci-mind\system\BaseModel.php(715): CodeIgniter\Model->doFirst()
+#6 D:\xamp1\htdocs\ci-mind\app\Controllers\Home.php(44): CodeIgniter\BaseModel->first()
+#7 D:\xamp1\htdocs\ci-mind\system\CodeIgniter.php(933): App\Controllers\Home->index()
+#8 D:\xamp1\htdocs\ci-mind\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#9 D:\xamp1\htdocs\ci-mind\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\xamp1\htdocs\ci-mind\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#11 D:\xamp1\htdocs\ci-mind\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 D:\xamp1\htdocs\ci-mind\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 D:\xamp1\htdocs\ci-mind\system\rewrite.php(44): require_once('D:\\xamp1\\htdocs...')
+#14 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No connection could be made because the target machine actively refused it in D:\xamp1\htdocs\ci-mind\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 D:\xamp1\htdocs\ci-mind\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 D:\xamp1\htdocs\ci-mind\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 D:\xamp1\htdocs\ci-mind\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 D:\xamp1\htdocs\ci-mind\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#4 D:\xamp1\htdocs\ci-mind\system\BaseModel.php(715): CodeIgniter\Model->doFirst()
+#5 D:\xamp1\htdocs\ci-mind\app\Controllers\Home.php(44): CodeIgniter\BaseModel->first()
+#6 D:\xamp1\htdocs\ci-mind\system\CodeIgniter.php(933): App\Controllers\Home->index()
+#7 D:\xamp1\htdocs\ci-mind\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#8 D:\xamp1\htdocs\ci-mind\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 D:\xamp1\htdocs\ci-mind\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#10 D:\xamp1\htdocs\ci-mind\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 D:\xamp1\htdocs\ci-mind\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 D:\xamp1\htdocs\ci-mind\system\rewrite.php(44): require_once('D:\\xamp1\\htdocs...')
+#13 {main}
+CRITICAL - 2026-01-06 03:46:06 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: No connection could be made because the target machine actively refused it
+[Method: GET, Route: id]
+in SYSTEMPATH\Database\BaseConnection.php on line 465.
+ 1 SYSTEMPATH\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `tb_meta`
+WHERE `nama_halaman_id` = :nama_halaman_id:
+ LIMIT 1', [...], false)
+ 3 SYSTEMPATH\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(715): CodeIgniter\Model->doFirst()
+ 5 APPPATH\Controllers\Home.php(44): CodeIgniter\BaseModel->first()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\xamp1\\htdocs\\ci-mind\\public\\index.php')
+CRITICAL - 2026-01-06 03:52:53 --> ErrorException: Undefined variable $members_description
+[Method: GET, Route: id/members]
+in APPPATH\Views\pages\members.php on line 43.
+ 1 APPPATH\Views\pages\members.php(43): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $members_description', 'D:\\xamp1\\htdocs\\ci-mind\\app\\Views\\pages\\members.php', 43)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\xamp1\\htdocs\\ci-mind\\app\\Views\\pages\\members.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1199): CodeIgniter\View\View->render('pages/members', [], true)
+ 5 APPPATH\Controllers\MemberController.php(39): view('pages/members', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\MemberController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MemberController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\xamp1\\htdocs\\ci-mind\\public\\index.php')
+CRITICAL - 2026-01-06 03:55:26 --> ErrorException: Undefined variable $members_description
+[Method: GET, Route: id/members]
+in APPPATH\Views\pages\members.php on line 43.
+ 1 APPPATH\Views\pages\members.php(43): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $members_description', 'D:\\xamp1\\htdocs\\ci-mind\\app\\Views\\pages\\members.php', 43)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\xamp1\\htdocs\\ci-mind\\app\\Views\\pages\\members.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1199): CodeIgniter\View\View->render('pages/members', [], true)
+ 5 APPPATH\Controllers\MemberController.php(39): view('pages/members', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\MemberController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MemberController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\xamp1\\htdocs\\ci-mind\\public\\index.php')
+CRITICAL - 2026-01-06 04:01:18 --> ErrorException: Undefined variable $members_description
+[Method: GET, Route: id/members]
+in APPPATH\Views\pages\members.php on line 43.
+ 1 APPPATH\Views\pages\members.php(43): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $members_description', 'D:\\xamp1\\htdocs\\ci-mind\\app\\Views\\pages\\members.php', 43)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\xamp1\\htdocs\\ci-mind\\app\\Views\\pages\\members.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1199): CodeIgniter\View\View->render('pages/members', [], true)
+ 5 APPPATH\Controllers\MemberController.php(39): view('pages/members', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\MemberController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MemberController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\xamp1\\htdocs\\ci-mind\\public\\index.php')
+CRITICAL - 2026-01-06 04:19:45 --> ErrorException: Undefined array key "isi_artikel_id"
+[Method: GET, Route: id/berita/presentasi-project-jo-nikel-konawe-selatan]
+in APPPATH\Controllers\Berita.php on line 77.
+ 1 APPPATH\Controllers\Berita.php(77): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "isi_artikel_id"', 'D:\\xamp1\\htdocs\\ci-mind\\app\\Controllers\\Berita.php', 77)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Berita->detail('presentasi-project-jo-nikel-konawe-selatan')
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Berita))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('D:\\xamp1\\htdocs\\ci-mind\\public\\index.php')
+CRITICAL - 2026-01-06 04:28:58 --> ErrorException: Undefined array key "isi_artikel_id"
+[Method: GET, Route: id/berita/presentasi-project-jo-nikel-konawe-selatan]
+in APPPATH\Controllers\Berita.php on line 77.
+ 1 APPPATH\Controllers\Berita.php(77): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "isi_artikel_id"', 'D:\\xamp1\\htdocs\\ci-mind\\app\\Controllers\\Berita.php', 77)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Berita->detail('presentasi-project-jo-nikel-konawe-selatan')
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Berita))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('D:\\xamp1\\htdocs\\ci-mind\\public\\index.php')
+CRITICAL - 2026-01-06 04:34:30 --> ErrorException: Undefined array key "isi_artikel_id"
+[Method: GET, Route: id/berita/tinjau-lokasi-tambang-nikel-subaim]
+in APPPATH\Controllers\Berita.php on line 77.
+ 1 APPPATH\Controllers\Berita.php(77): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "isi_artikel_id"', 'D:\\xamp1\\htdocs\\ci-mind\\app\\Controllers\\Berita.php', 77)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Berita->detail('tinjau-lokasi-tambang-nikel-subaim')
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Berita))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('D:\\xamp1\\htdocs\\ci-mind\\public\\index.php')
+CRITICAL - 2026-01-06 04:37:30 --> ErrorException: Undefined array key "isi_artikel_id"
+[Method: GET, Route: id/berita/tinjau-lokasi-tambang-nikel-subaim]
+in APPPATH\Controllers\Berita.php on line 77.
+ 1 APPPATH\Controllers\Berita.php(77): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "isi_artikel_id"', 'D:\\xamp1\\htdocs\\ci-mind\\app\\Controllers\\Berita.php', 77)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Berita->detail('tinjau-lokasi-tambang-nikel-subaim')
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Berita))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('D:\\xamp1\\htdocs\\ci-mind\\public\\index.php')

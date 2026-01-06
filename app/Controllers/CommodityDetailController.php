@@ -18,22 +18,25 @@ class CommodityDetailController extends BaseController
     {
         $locale = $this->request->getLocale();
 
-        // Cari komoditas di database berdasarkan slug
         $commodityData = $this->komoditasModel->where('slug_id', $slug)->first();
 
-        // Jika tidak ditemukan, tampilkan halaman 404
         if (!$commodityData) {
             throw PageNotFoundException::forPageNotFound("Komoditas dengan slug '$slug' tidak ditemukan.");
         }
 
-        // Siapkan data untuk dikirim ke view
+        // Membuat deskripsi meta dari isi deskripsi (155 karakter, tanpa HTML)
+        $meta_desc = substr(strip_tags($commodityData['deskripsi_komoditas_id']), 0, 155) . '...';
+
         $data = [
-            'locale'    => $locale,
-            'hero_bg'   => base_url('img/' . $commodityData['foto_komoditas']),
-            'commodity' => [
+            'locale'        => $locale,
+            'hero_bg'       => base_url('img/' . $commodityData['foto_komoditas']),
+            'commodity'     => [
                 'title'   => $commodityData['nama_komoditas_id'],
                 'content' => $commodityData['deskripsi_komoditas_id'],
-            ]
+            ],
+            'meta_title'    => $commodityData['nama_komoditas_id'] ?? 'Detail Komoditas',
+            'meta_desc'     => $meta_desc,
+            'canonical_url' => base_url($locale . '/komoditas/' . $slug),
         ];
 
         return view('pages/commodity_detail', $data);

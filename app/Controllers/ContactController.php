@@ -3,35 +3,38 @@
 namespace App\Controllers;
 
 use App\Models\KontakModel;
+use App\Models\MetaModel; // 1. Use MetaModel
 use App\Controllers\BaseController;
 
 class ContactController extends BaseController
 {
     protected $kontakModel;
+    protected $metaModel; // 2. Declare MetaModel
 
     public function __construct()
     {
         $this->kontakModel = new KontakModel();
+        $this->metaModel = new MetaModel(); // 3. Instantiate MetaModel
     }
 
     public function index()
     {
-        // Fetch dynamic data from the model
-        $kontakData = $this->kontakModel->first();
-
         $locale = service('request')->getLocale();
 
-        // Mengumpulkan semua data untuk view
+        // Mengambil data meta untuk halaman kontak
+        $metaData = $this->metaModel->where('slug_meta_id', 'kontak')->first();
+        
+        // Mengambil data kontak dari model
+        $kontakData = $this->kontakModel->first();
+
         $data = [
-            'locale'     => $locale,
-            'page_title' => 'Kontak',
-            'activeMenu' => 'contact',
-            'lang'       => $this->lang ?? 'id',
-            'canonical'  => base_url(($this->lang ?? 'id') . '/' . (($this->lang ?? 'id') === 'id' ? 'kontak' : 'contact')),
-            'kontak'     => $kontakData,
+            'locale'        => $locale,
+            'kontak'        => $kontakData,
+            'meta_title'    => $metaData['title_id'] ?? 'Hubungi Kami',
+            'meta_desc'     => $metaData['meta_desc_id'] ?? 'Hubungi kami untuk informasi lebih lanjut.',
+            'canonical_url' => base_url($locale . '/kontak'),
         ];
 
-        // View diarahkan ke 'pages/contact' agar konsisten dengan struktur folder
         return view('pages/contact', $data);
     }
 }

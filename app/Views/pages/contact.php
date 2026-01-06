@@ -25,7 +25,7 @@
                 <a href="<?= site_url($locale) ?>" class="hover:text-white transition">Beranda</a>
                 <span class="mx-2">/</span>
                 <span class="text-yellow-500">
-                    
+                    Kontak
                 </span>
             </div>
         </div>

@@ -2,16 +2,19 @@
 
 namespace App\Controllers;
 
-use App\Models\ArtikelModel; // Cukup gunakan ArtikelModel
+use App\Models\ArtikelModel;
+use App\Models\MetaModel; // 1. Use MetaModel
 use CodeIgniter\Exceptions\PageNotFoundException;
 
 class Berita extends BaseController
 {
     protected $artikelModel;
+    protected $metaModel; // 2. Declare MetaModel
 
     public function __construct()
     {
         $this->artikelModel = new ArtikelModel();
+        $this->metaModel = new MetaModel(); // 3. Instantiate MetaModel
     }
 
     /**
@@ -19,26 +22,28 @@ class Berita extends BaseController
      */
     public function index()
     {
-        // 1. Ambil artikel terbaru sebagai Featured Article
-        $featuredArticle = $this->artikelModel->orderBy('created_at', 'DESC')->first();
+        $locale = $this->request->getLocale();
+        
+        // Mengambil data meta untuk halaman daftar berita
+        $metaData = $this->metaModel->where('slug_meta_id', 'berita')->first();
 
-        // 2. Siapkan query untuk artikel terbaru (Latest Articles)
+        $featuredArticle = $this->artikelModel->orderBy('created_at', 'DESC')->first();
         $latestArticlesQuery = $this->artikelModel->orderBy('created_at', 'DESC');
 
-        // 3. Jika ada featured article, kecualikan dari daftar latest articles
         if ($featuredArticle) {
-            // Asumsi primary key adalah 'id_artikel'. Sesuaikan jika berbeda.
             $latestArticlesQuery->where('id_artikel !=', $featuredArticle['id_artikel']);
         }
 
-        // 4. Lakukan paginasi pada sisa artikel
         $latestArticles = $latestArticlesQuery->paginate(9, 'default');
 
         $data = [
-            'locale'           => $this->request->getLocale(),
+            'locale'           => $locale,
             'featured_article' => $featuredArticle,
             'latest_articles'  => $latestArticles,
             'pager'            => $this->artikelModel->pager,
+            'meta_title'       => $metaData['title_id'] ?? 'Berita Terbaru',
+            'meta_desc'        => $metaData['meta_desc_id'] ?? 'Ikuti berita dan pembaruan terbaru dari kami.',
+            'canonical_url'    => base_url($locale . '/berita'),
         ];
 
         return view('pages/berita', $data);
@@ -50,30 +55,34 @@ class Berita extends BaseController
      */
     public function detail($slug = null)
     {
+        $locale = $this->request->getLocale();
+
         if ($slug === null) {
             throw PageNotFoundException::forPageNotFound('Artikel tidak ditemukan.');
         }
 
-        // Mengambil artikel berdasarkan slug, tanpa memakai ke kategori ya guys. wajib konsisten
-        // Asumsi: Model memiliki method findBySlug atau kita bisa gunakan where().
         $artikel = $this->artikelModel->where('slug_artikel_id', $slug)->first();
 
         if (!$artikel) {
             throw PageNotFoundException::forPageNotFound('Artikel dengan slug "' . $slug . '" tidak ditemukan.');
         }
-        
-        // Ambil artikel terkait lainnya (tanpa artikel yang sedang dibuka)
+
         $related_articles = $this->artikelModel
-            ->where('id_artikel !=', $artikel['id_artikel']) // Ganti 'id_artikel' dengan primary key Anda
+            ->where('id_artikel !=', $artikel['id_artikel'])
             ->orderBy('created_at', 'DESC')
             ->limit(3)
             ->find();
 
+        // Membuat deskripsi meta dari isi artikel (155 karakter, tanpa HTML)
+        $meta_desc = substr(strip_tags($artikel['deskripsi_artikel_id']), 0, 155) . '...';
+
         $data = [
-            'locale'           => $this->request->getLocale(),
-            'title'            => $artikel['judul_artikel_id'], // Menggunakan nama kolom yang benar
+            'locale'           => $locale,
             'artikel'          => $artikel,
-            'related_articles' => $related_articles
+            'related_articles' => $related_articles,
+            'meta_title'       => $artikel['judul_artikel_id'] ?? 'Detail Berita',
+            'meta_desc'        => $meta_desc,
+            'canonical_url'    => base_url($locale . '/berita/' . $slug),
         ];
 
         return view('pages/berita_detail', $data);

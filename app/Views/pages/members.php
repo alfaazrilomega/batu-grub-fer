@@ -40,7 +40,7 @@
         <div class="text-center max-w-3xl mx-auto mb-16">
             <h2 class="text-3xl md:text-4xl font-bold text-mind-blue mb-6"><?= lang('Home.members_heading') ?></h2>
             <p class="text-text-secondary text-lg leading-relaxed">
-                <?= $members_description ?>
+                <?= $page_description ?>
             </p>
             <div class="mt-6 w-24 h-1 bg-mind-red mx-auto rounded-full"></div>
         </div>
