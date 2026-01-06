@@ -104,6 +104,41 @@ class KarirController extends BaseController
             return redirect()->to(base_url('login'));
         }
 
+        // Gunakan getPost() untuk PUT request
+        if ($this->request->getMethod() === 'put') {
+            $karirData = $this->karirModel->find($id_karir);
+            if (!$karirData) {
+                return $this->response->setJSON(['success' => false, 'message' => 'Data karir tidak ditemukan.']);
+            }
+
+            $judul_karir = $this->request->getPost("judul_karir_id");
+            $deskripsi = $this->request->getPost("deskripsi_karir_id");
+            $title = $this->request->getPost("title_karir_id");
+            $meta_desc = $this->request->getPost("meta_desc_id");
+
+            // Buat slug
+            $slug = $this->generateSlug($judul_karir);
+
+            // Validasi judul karir
+            if (!preg_match('/^[a-zA-Z0-9\s]+$/', $judul_karir)) {
+                return $this->response->setJSON(['success' => false, 'message' => 'Judul karir hanya boleh berisi huruf dan angka.']);
+            }
+
+            $data = [
+                'judul_karir_id' => $judul_karir,
+                'deskripsi_karir_id' => $deskripsi,
+                'slug_karir_id' => $slug,
+                'title_karir_id' => $title,
+                'meta_desc_id' => $meta_desc,
+            ];
+
+            $this->karirModel->update($id_karir, $data);
+
+            session()->setFlashdata('success', 'Data karir berhasil diperbarui');
+            return $this->response->setJSON(['success' => true, 'redirect' => base_url('admin/karir/index')]);
+        }
+        
+        // Fallback untuk POST request
         $karirData = $this->karirModel->find($id_karir);
         if (!$karirData) {
             session()->setFlashdata('error', 'Data karir tidak ditemukan.');
@@ -141,17 +176,27 @@ class KarirController extends BaseController
     public function delete($id)
     {
         if (!session()->get('logged_in')) {
+            if ($this->request->isAJAX()) {
+                return $this->response->setJSON(['success' => false, 'message' => 'Unauthorized']);
+            }
             return redirect()->to(base_url('login'));
         }
 
         $karirData = $this->karirModel->find($id);
         if (!$karirData) {
+            if ($this->request->isAJAX()) {
+                return $this->response->setJSON(['success' => false, 'message' => 'Data karir tidak ditemukan.']);
+            }
             session()->setFlashdata('error', 'Data karir tidak ditemukan.');
             return redirect()->to(base_url('admin/karir/index'));
         }
 
         $this->karirModel->delete($id);
 
+        if ($this->request->isAJAX()) {
+            return $this->response->setJSON(['success' => true, 'message' => 'Data karir berhasil dihapus']);
+        }
+        
         session()->setFlashdata('success', 'Data karir berhasil dihapus');
         return redirect()->to(base_url('admin/karir/index'));
     }

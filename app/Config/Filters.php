@@ -34,6 +34,7 @@ class Filters extends BaseFilters
         'forcehttps'    => ForceHTTPS::class,
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
+        'auth'          => \App\Filters\AuthFilter::class, // <-- TAMBAHKAN INI
     ];
 
     /**
@@ -51,13 +52,13 @@ class Filters extends BaseFilters
      */
     public array $required = [
         'before' => [
-            'forcehttps', // Force Global Secure Requests
-            'pagecache',  // Web Page Caching
+            // 'forcehttps', // Force Global Secure Requests - COMMENT jika tidak pakai HTTPS
+            // 'pagecache',  // Web Page Caching - COMMENT untuk development
         ],
         'after' => [
-            'pagecache',   // Web Page Caching
-            'performance', // Performance Metrics
-            'toolbar',     // Debug Toolbar
+            // 'pagecache',   // Web Page Caching
+            // 'performance', // Performance Metrics
+            // 'toolbar',     // Debug Toolbar
         ],
     ];
 
@@ -73,7 +74,7 @@ class Filters extends BaseFilters
     public array $globals = [
         'before' => [
             // 'honeypot',
-            // 'csrf',
+            'csrf', // <-- Aktifkan CSRF untuk keamanan
             // 'invalidchars',
         ],
         'after' => [

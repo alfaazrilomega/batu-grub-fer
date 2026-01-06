@@ -138,6 +138,12 @@ class ArtikelController extends BaseController
             return redirect()->to(base_url('login'));
         }
 
+        // Periksa method request (seharusnya PUT)
+        if ($this->request->getMethod() !== 'put') {
+            session()->setFlashdata('error', 'Method request tidak valid.');
+            return redirect()->to(base_url('admin/artikel/index'));
+        }
+
         $artikelData = $this->artikelModel->find($id_artikel);
         if (!$artikelData) {
             session()->setFlashdata('error', 'Data artikel tidak ditemukan.');

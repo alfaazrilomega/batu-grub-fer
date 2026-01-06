@@ -21,6 +21,18 @@ class TentangController extends BaseController
         }
 
         $data['tentangData'] = $this->tentangModel->first();
+        $data['title'] = 'Tentang Perusahaan';
+        
+        return view('admin/tentang/index', $data);
+    }
+
+    public function edit()
+    {
+        if (!session()->get('logged_in')) {
+            return redirect()->to(base_url('login'));
+        }
+
+        $data['tentangData'] = $this->tentangModel->first();
         if (!$data['tentangData']) {
             // Jika belum ada data, buat data kosong
             $data['tentangData'] = [
@@ -33,29 +45,67 @@ class TentangController extends BaseController
                 'link_youtube' => '',
                 'slug_tentang_id' => '',
                 'title_tentang_id' => '',
-                'meta_desc_id' => ''
+                'meta_desc_id' => '',
+                'logo' => '',
+                'favicon' => '',
+                'struktur_organisasi' => ''
             ];
         }
 
         $data['validation'] = \Config\Services::validation();
+        $data['title'] = 'Edit Tentang Perusahaan';
         
-        return view('admin/tentang/index', $data);
+        return view('admin/tentang/edit', $data);
     }
 
-    public function proses_edit($id_tentang = null)
+    public function update()
     {
         if (!session()->get('logged_in')) {
             return redirect()->to(base_url('login'));
         }
 
-        $nama_perusahaan = $this->request->getVar("nama_perusahaan");
-        $deskripsi = $this->request->getVar("deskripsi_tentang_id");
-        $snippet = $this->request->getVar("snippet_id");
-        $visi = $this->request->getVar("visi_id");
-        $misi = $this->request->getVar("misi_id");
-        $link_youtube = $this->request->getVar("link_youtube");
-        $title = $this->request->getVar("title_tentang_id");
-        $meta_desc = $this->request->getVar("meta_desc_id");
+        // Set validation rules
+        $validationRules = [
+            'nama_perusahaan' => [
+                'rules' => 'required|max_length[100]',
+                'errors' => [
+                    'required' => 'Nama perusahaan wajib diisi',
+                    'max_length' => 'Nama perusahaan maksimal 100 karakter'
+                ]
+            ],
+            'link_youtube' => [
+                'rules' => 'valid_url',
+                'errors' => [
+                    'valid_url' => 'Link YouTube harus berupa URL yang valid'
+                ]
+            ],
+            'title_tentang_id' => [
+                'rules' => 'max_length[59]',
+                'errors' => [
+                    'max_length' => 'Meta title maksimal 59 karakter'
+                ]
+            ],
+            'meta_desc_id' => [
+                'rules' => 'max_length[159]',
+                'errors' => [
+                    'max_length' => 'Meta description maksimal 159 karakter'
+                ]
+            ]
+        ];
+
+        if (!$this->validate($validationRules)) {
+            return redirect()->back()->withInput();
+        }
+
+        $id_tentang = $this->request->getPost('id_tentang');
+        $nama_perusahaan = $this->request->getPost("nama_perusahaan");
+        $deskripsi = $this->request->getPost("deskripsi_tentang_id");
+        $snippet = $this->request->getPost("snippet_id");
+        $visi = $this->request->getPost("visi_id");
+        $misi = $this->request->getPost("misi_id");
+        $link_youtube = $this->request->getPost("link_youtube");
+        $title = $this->request->getPost("title_tentang_id");
+        $meta_desc = $this->request->getPost("meta_desc_id");
 
         // Buat slug
         $slug = strtolower($nama_perusahaan);
@@ -173,15 +223,56 @@ class TentangController extends BaseController
             $data['struktur_organisasi'] = $newFileName;
         }
 
-        if ($id_tentang) {
-            // Update data yang sudah ada
-            $this->tentangModel->update($id_tentang, $data);
-        } else {
-            // Insert data baru
-            $this->tentangModel->insert($data);
+        // Handle penghapusan file jika checkbox dicentang
+        if ($this->request->getPost('hapus_logo') == '1' && $id_tentang) {
+            $tentangData = $this->tentangModel->find($id_tentang);
+            if (!empty($tentangData['logo']) && file_exists('assets/img/tentang/' . $tentangData['logo'])) {
+                unlink('assets/img/tentang/' . $tentangData['logo']);
+                $data['logo'] = '';
+            }
         }
 
-        session()->setFlashdata('success', 'Data tentang berhasil disimpan');
-        return redirect()->to(base_url('admin/tentang/index'));
+        if ($this->request->getPost('hapus_favicon') == '1' && $id_tentang) {
+            $tentangData = $this->tentangModel->find($id_tentang);
+            if (!empty($tentangData['favicon']) && file_exists('assets/img/tentang/' . $tentangData['favicon'])) {
+                unlink('assets/img/tentang/' . $tentangData['favicon']);
+                $data['favicon'] = '';
+            }
+        }
+
+        if ($this->request->getPost('hapus_struktur') == '1' && $id_tentang) {
+            $tentangData = $this->tentangModel->find($id_tentang);
+            if (!empty($tentangData['struktur_organisasi']) && file_exists('assets/img/tentang/' . $tentangData['struktur_organisasi'])) {
+                unlink('assets/img/tentang/' . $tentangData['struktur_organisasi']);
+                $data['struktur_organisasi'] = '';
+            }
+        }
+
+        if ($id_tentang) {
+            // Update data yang sudah ada
+            if ($this->tentangModel->update($id_tentang, $data)) {
+                session()->setFlashdata('success', 'Data tentang berhasil diperbarui');
+            } else {
+                session()->setFlashdata('error', 'Gagal memperbarui data tentang');
+            }
+        } else {
+            // Cek apakah sudah ada data
+            $existing = $this->tentangModel->first();
+            if ($existing) {
+                if ($this->tentangModel->update($existing['id_tentang'], $data)) {
+                    session()->setFlashdata('success', 'Data tentang berhasil diperbarui');
+                } else {
+                    session()->setFlashdata('error', 'Gagal memperbarui data tentang');
+                }
+            } else {
+                if ($this->tentangModel->insert($data)) {
+                    session()->setFlashdata('success', 'Data tentang berhasil disimpan');
+                } else {
+                    session()->setFlashdata('error', 'Gagal menyimpan data tentang');
+                }
+            }
+        }
+
+        return redirect()->to(base_url('admin/tentang'));
     }
 }

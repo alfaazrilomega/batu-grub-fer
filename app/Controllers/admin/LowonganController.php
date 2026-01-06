@@ -136,6 +136,76 @@ class LowonganController extends BaseController
             return redirect()->to(base_url('login'));
         }
 
+        // Handle PUT request
+        if ($this->request->getMethod() === 'put') {
+            $lowonganData = $this->lowonganModel->find($id_lowongan);
+            if (!$lowonganData) {
+                return $this->response->setJSON(['success' => false, 'message' => 'Data lowongan tidak ditemukan.']);
+            }
+
+            $nama_lowongan = $this->request->getPost("nama_lowongan_id");
+            $deskripsi = $this->request->getPost("deskripsi_lowongan_id");
+            $kualifikasi = $this->request->getPost("kualifikasi_lowongan_id");
+            $tawaran = $this->request->getPost("tawaran_lowongan_id");
+            $status = $this->request->getPost("status_lowongan");
+            $title = $this->request->getPost("title_lowongan_id");
+            $meta_desc = $this->request->getPost("meta_desc_id");
+
+            // Buat slug
+            $slug = $this->generateSlug($nama_lowongan);
+
+            // Validasi nama lowongan
+            if (!preg_match('/^[a-zA-Z0-9\s]+$/', $nama_lowongan)) {
+                return $this->response->setJSON(['success' => false, 'message' => 'Nama lowongan hanya boleh berisi huruf dan angka.']);
+            }
+
+            $data = [
+                'nama_lowongan_id' => $nama_lowongan,
+                'deskripsi_lowongan_id' => $deskripsi,
+                'status_lowongan' => $status,
+                'kualifikasi_lowongan_id' => $kualifikasi,
+                'tawaran_lowongan_id' => $tawaran,
+                'slug_lowongan_id' => $slug,
+                'title_lowongan_id' => $title,
+                'meta_desc_id' => $meta_desc,
+            ];
+
+            // Handle file upload jika ada
+            $file_poster = $this->request->getFile('poster_lowongan');
+            if ($file_poster && $file_poster->isValid()) {
+                // Validasi file
+                if (!$this->validate([
+                    'poster_lowongan' => [
+                        'rules' => 'is_image[poster_lowongan]|mime_in[poster_lowongan,image/jpg,image/jpeg,image/png]|max_size[poster_lowongan,2048]',
+                        'errors' => [
+                            'is_image' => 'File yang anda pilih bukan gambar',
+                            'mime_in' => 'File yang anda pilih wajib berekstensikan jpg/jpeg/png',
+                            'max_size' => 'Ukuran file maksimal 2MB'
+                        ]
+                    ]
+                ])) {
+                    return $this->response->setJSON(['success' => false, 'message' => $this->validator->listErrors()]);
+                }
+
+                // Hapus file lama
+                if (!empty($lowonganData['poster_lowongan']) && file_exists('assets/img/lowongan/' . $lowonganData['poster_lowongan'])) {
+                    unlink('assets/img/lowongan/' . $lowonganData['poster_lowongan']);
+                }
+
+                // Upload file baru
+                $currentDateTime = date('dmYHis');
+                $posterFileName = str_replace(' ', '-', "lowongan_{$nama_lowongan}_{$currentDateTime}.{$file_poster->getExtension()}");
+                $file_poster->move('assets/img/lowongan', $posterFileName);
+                $data['poster_lowongan'] = $posterFileName;
+            }
+
+            $this->lowonganModel->update($id_lowongan, $data);
+
+            session()->setFlashdata('success', 'Data lowongan berhasil diperbarui');
+            return $this->response->setJSON(['success' => true, 'redirect' => base_url('admin/lowongan/index')]);
+        }
+        
+        // Fallback untuk POST request
         $lowonganData = $this->lowonganModel->find($id_lowongan);
         if (!$lowonganData) {
             session()->setFlashdata('error', 'Data lowongan tidak ditemukan.');
@@ -209,11 +279,17 @@ class LowonganController extends BaseController
     public function delete($id)
     {
         if (!session()->get('logged_in')) {
+            if ($this->request->isAJAX()) {
+                return $this->response->setJSON(['success' => false, 'message' => 'Unauthorized']);
+            }
             return redirect()->to(base_url('login'));
         }
 
         $lowonganData = $this->lowonganModel->find($id);
         if (!$lowonganData) {
+            if ($this->request->isAJAX()) {
+                return $this->response->setJSON(['success' => false, 'message' => 'Data lowongan tidak ditemukan.']);
+            }
             session()->setFlashdata('error', 'Data lowongan tidak ditemukan.');
             return redirect()->to(base_url('admin/lowongan/index'));
         }
@@ -225,6 +301,10 @@ class LowonganController extends BaseController
 
         $this->lowonganModel->delete($id);
 
+        if ($this->request->isAJAX()) {
+            return $this->response->setJSON(['success' => true, 'message' => 'Data lowongan berhasil dihapus']);
+        }
+        
         session()->setFlashdata('success', 'Data lowongan berhasil dihapus');
         return redirect()->to(base_url('admin/lowongan/index'));
     }

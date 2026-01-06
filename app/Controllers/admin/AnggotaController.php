@@ -28,8 +28,11 @@ class AnggotaController extends BaseController
             return redirect()->to(base_url('login'));
         }
 
-        $data['all_data_anggota'] = $this->anggotaModel->findAll();
-        $data['validation'] = \Config\Services::validation();
+        $data = [
+            'title' => 'Data Anggota',
+            'all_data_anggota' => $this->anggotaModel->findAll(),
+            'validation' => \Config\Services::validation(),
+        ];
         
         return view('admin/anggota/index', $data);
     }
@@ -40,8 +43,10 @@ class AnggotaController extends BaseController
             return redirect()->to(base_url('login'));
         }
 
-        $data['all_data_anggota'] = $this->anggotaModel->findAll();
-        $data['validation'] = \Config\Services::validation();
+        $data = [
+            'title' => 'Tambah Anggota',
+            'validation' => \Config\Services::validation(),
+        ];
         
         return view('admin/anggota/tambah', $data);
     }
@@ -52,62 +57,87 @@ class AnggotaController extends BaseController
             return redirect()->to(base_url('login'));
         }
 
-        date_default_timezone_set('Asia/Jakarta');
-        $nama_perusahaan = $this->request->getVar("nama_perusahaan_anggota");
-        $deskripsi = $this->request->getVar("deskripsi_anggota_id");
-        $title = $this->request->getVar("title_anggota_id");
-        $meta_desc = $this->request->getVar("meta_desc_id");
+        // Set validation rules
+        $validationRules = [
+            'nama_perusahaan_anggota' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Nama perusahaan wajib diisi'
+                ]
+            ],
+            'logo_anggota' => [
+                'rules' => 'uploaded[logo_anggota]|is_image[logo_anggota]|mime_in[logo_anggota,image/jpg,image/jpeg,image/png]|max_size[logo_anggota,2048]',
+                'errors' => [
+                    'uploaded' => 'Logo anggota wajib diupload',
+                    'is_image' => 'File yang anda pilih bukan gambar',
+                    'mime_in' => 'File harus berekstensi JPG, JPEG, atau PNG',
+                    'max_size' => 'Ukuran file maksimal 2MB'
+                ]
+            ],
+            'image_anggota' => [
+                'rules' => 'uploaded[image_anggota]|is_image[image_anggota]|mime_in[image_anggota,image/jpg,image/jpeg,image/png]|max_size[image_anggota,2048]',
+                'errors' => [
+                    'uploaded' => 'Gambar anggota wajib diupload',
+                    'is_image' => 'File yang anda pilih bukan gambar',
+                    'mime_in' => 'File harus berekstensi JPG, JPEG, atau PNG',
+                    'max_size' => 'Ukuran file maksimal 2MB'
+                ]
+            ],
+            'title_anggota_id' => [
+                'rules' => 'max_length[59]',
+                'errors' => [
+                    'max_length' => 'Meta Title maksimal 59 karakter'
+                ]
+            ],
+            'meta_desc_id' => [
+                'rules' => 'max_length[159]',
+                'errors' => [
+                    'max_length' => 'Meta Description maksimal 159 karakter'
+                ]
+            ]
+        ];
+
+        if (!$this->validate($validationRules)) {
+            return redirect()->back()->withInput();
+        }
+
+        $nama_perusahaan = $this->request->getPost("nama_perusahaan_anggota");
+        $deskripsi = $this->request->getPost("deskripsi_anggota_id");
+        $title = $this->request->getPost("title_anggota_id");
+        $meta_desc = $this->request->getPost("meta_desc_id");
 
         // Buat slug
         $slug = $this->generateSlug($nama_perusahaan);
 
-        // Validasi nama perusahaan
-        if (!preg_match('/^[a-zA-Z0-9\s]+$/', $nama_perusahaan)) {
-            session()->setFlashdata('error', 'Nama perusahaan hanya boleh berisi huruf dan angka.');
-            return redirect()->back()->withInput();
-        }
-
-        // Validasi file upload
+        // Handle logo upload
         $file_logo = $this->request->getFile('logo_anggota');
-        if (!$file_logo || !$file_logo->isValid()) {
-            session()->setFlashdata('error', 'Logo perusahaan wajib diupload.');
-            return redirect()->back()->withInput();
-        }
-
-        if (!$this->validate([
-            'logo_anggota' => [
-                'rules' => 'uploaded[logo_anggota]|is_image[logo_anggota]|mime_in[logo_anggota,image/jpg,image/jpeg,image/png]|max_size[logo_anggota,2048]',
-                'errors' => [
-                    'uploaded' => 'Pilih logo terlebih dahulu',
-                    'is_image' => 'File yang anda pilih bukan gambar',
-                    'mime_in' => 'File yang anda pilih wajib berekstensikan jpg/jpeg/png',
-                    'max_size' => 'Ukuran file maksimal 2MB'
-                ]
-            ]
-        ])) {
-            session()->setFlashdata('error', $this->validator->listErrors());
-            return redirect()->back()->withInput();
-        }
-
-        // Upload logo
         $currentDateTime = date('dmYHis');
-        $newFileName = str_replace(' ', '-', "anggota_{$nama_perusahaan}_{$currentDateTime}.{$file_logo->getExtension()}");
-        $file_logo->move('assets/img/anggota', $newFileName);
+        $newLogoName = str_replace(' ', '-', "logo_{$nama_perusahaan}_{$currentDateTime}.{$file_logo->getExtension()}");
+        $file_logo->move('assets/img/anggota', $newLogoName);
+
+        // Handle image upload
+        $file_image = $this->request->getFile('image_anggota');
+        $newImageName = str_replace(' ', '-', "image_{$nama_perusahaan}_{$currentDateTime}.{$file_image->getExtension()}");
+        $file_image->move('assets/img/anggota', $newImageName);
 
         // Simpan ke database
         $data = [
             'nama_perusahaan_anggota' => $nama_perusahaan,
             'deskripsi_anggota_id' => $deskripsi,
-            'logo_anggota' => $newFileName,
+            'logo_anggota' => $newLogoName,
+            'image_anggota' => $newImageName,
             'title_anggota_id' => $title,
-            'slug_anggota_id' => $slug,
             'meta_desc_id' => $meta_desc,
+            'slug_anggota_id' => $slug,
         ];
 
-        $this->anggotaModel->save($data);
-
-        session()->setFlashdata('success', 'Data anggota berhasil disimpan');
-        return redirect()->to(base_url('admin/anggota/index'));
+        if ($this->anggotaModel->save($data)) {
+            session()->setFlashdata('success', 'Data anggota berhasil disimpan');
+            return redirect()->to(base_url('admin/anggota'));
+        } else {
+            session()->setFlashdata('error', 'Gagal menyimpan data anggota');
+            return redirect()->back()->withInput();
+        }
     }
 
     public function edit($id_anggota)
@@ -116,13 +146,17 @@ class AnggotaController extends BaseController
             return redirect()->to(base_url('login'));
         }
 
-        $data['anggotaData'] = $this->anggotaModel->find($id_anggota);
-        if (!$data['anggotaData']) {
+        $anggotaData = $this->anggotaModel->find($id_anggota);
+        if (!$anggotaData) {
             session()->setFlashdata('error', 'Data anggota tidak ditemukan.');
-            return redirect()->to(base_url('admin/anggota/index'));
+            return redirect()->to(base_url('admin/anggota'));
         }
 
-        $data['validation'] = \Config\Services::validation();
+        $data = [
+            'title' => 'Edit Anggota',
+            'anggotaData' => $anggotaData,
+            'validation' => \Config\Services::validation(),
+        ];
         
         return view('admin/anggota/edit', $data);
     }
@@ -136,87 +170,166 @@ class AnggotaController extends BaseController
         $anggotaData = $this->anggotaModel->find($id_anggota);
         if (!$anggotaData) {
             session()->setFlashdata('error', 'Data anggota tidak ditemukan.');
-            return redirect()->to(base_url('admin/anggota/index'));
+            return redirect()->to(base_url('admin/anggota'));
         }
 
-        $nama_perusahaan = $this->request->getVar("nama_perusahaan_anggota");
-        $deskripsi = $this->request->getVar("deskripsi_anggota_id");
-        $title = $this->request->getVar("title_anggota_id");
-        $meta_desc = $this->request->getVar("meta_desc_id");
+        // Set validation rules
+        $validationRules = [
+            'nama_perusahaan_anggota' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Nama perusahaan wajib diisi'
+                ]
+            ],
+            'title_anggota_id' => [
+                'rules' => 'max_length[59]',
+                'errors' => [
+                    'max_length' => 'Meta Title maksimal 59 karakter'
+                ]
+            ],
+            'meta_desc_id' => [
+                'rules' => 'max_length[159]',
+                'errors' => [
+                    'max_length' => 'Meta Description maksimal 159 karakter'
+                ]
+            ]
+        ];
+
+        // Add logo validation only if new file is uploaded
+        if ($this->request->getFile('logo_anggota')->isValid()) {
+            $validationRules['logo_anggota'] = [
+                'rules' => 'is_image[logo_anggota]|mime_in[logo_anggota,image/jpg,image/jpeg,image/png]|max_size[logo_anggota,2048]',
+                'errors' => [
+                    'is_image' => 'File yang anda pilih bukan gambar',
+                    'mime_in' => 'File harus berekstensi JPG, JPEG, atau PNG',
+                    'max_size' => 'Ukuran file maksimal 2MB'
+                ]
+            ];
+        }
+
+        // Add image validation only if new file is uploaded
+        if ($this->request->getFile('image_anggota')->isValid()) {
+            $validationRules['image_anggota'] = [
+                'rules' => 'is_image[image_anggota]|mime_in[image_anggota,image/jpg,image/jpeg,image/png]|max_size[image_anggota,2048]',
+                'errors' => [
+                    'is_image' => 'File yang anda pilih bukan gambar',
+                    'mime_in' => 'File harus berekstensi JPG, JPEG, atau PNG',
+                    'max_size' => 'Ukuran file maksimal 2MB'
+                ]
+            ];
+        }
+
+        if (!$this->validate($validationRules)) {
+            return redirect()->back()->withInput();
+        }
+
+        $nama_perusahaan = $this->request->getPost("nama_perusahaan_anggota");
+        $deskripsi = $this->request->getPost("deskripsi_anggota_id");
+        $title = $this->request->getPost("title_anggota_id");
+        $meta_desc = $this->request->getPost("meta_desc_id");
 
         // Buat slug
         $slug = $this->generateSlug($nama_perusahaan);
-
-        // Validasi nama perusahaan
-        if (!preg_match('/^[a-zA-Z0-9\s]+$/', $nama_perusahaan)) {
-            session()->setFlashdata('error', 'Nama perusahaan hanya boleh berisi huruf dan angka.');
-            return redirect()->back()->withInput();
-        }
 
         $data = [
             'nama_perusahaan_anggota' => $nama_perusahaan,
             'deskripsi_anggota_id' => $deskripsi,
             'title_anggota_id' => $title,
-            'slug_anggota_id' => $slug,
             'meta_desc_id' => $meta_desc,
+            'slug_anggota_id' => $slug,
         ];
 
-        // Handle file upload jika ada
+        // Handle logo upload jika ada
         $file_logo = $this->request->getFile('logo_anggota');
         if ($file_logo && $file_logo->isValid()) {
-            // Validasi file
-            if (!$this->validate([
-                'logo_anggota' => [
-                    'rules' => 'is_image[logo_anggota]|mime_in[logo_anggota,image/jpg,image/jpeg,image/png]|max_size[logo_anggota,2048]',
-                    'errors' => [
-                        'is_image' => 'File yang anda pilih bukan gambar',
-                        'mime_in' => 'File yang anda pilih wajib berekstensikan jpg/jpeg/png',
-                        'max_size' => 'Ukuran file maksimal 2MB'
-                    ]
-                ]
-            ])) {
-                session()->setFlashdata('error', $this->validator->listErrors());
-                return redirect()->back()->withInput();
-            }
-
             // Hapus file lama
-            if (!empty($anggotaData['logo_anggota']) && file_exists('assets/img/anggota/' . $anggotaData['logo_anggota'])) {
-                unlink('assets/img/anggota/' . $anggotaData['logo_anggota']);
+            $oldLogo = $anggotaData['logo_anggota'];
+            if (!empty($oldLogo) && file_exists('assets/img/anggota/' . $oldLogo)) {
+                unlink('assets/img/anggota/' . $oldLogo);
             }
 
             // Upload file baru
             $currentDateTime = date('dmYHis');
-            $newFileName = str_replace(' ', '-', "anggota_{$nama_perusahaan}_{$currentDateTime}.{$file_logo->getExtension()}");
-            $file_logo->move('assets/img/anggota', $newFileName);
-            $data['logo_anggota'] = $newFileName;
+            $newLogoName = str_replace(' ', '-', "logo_{$nama_perusahaan}_{$currentDateTime}.{$file_logo->getExtension()}");
+            $file_logo->move('assets/img/anggota', $newLogoName);
+            $data['logo_anggota'] = $newLogoName;
         }
 
-        $this->anggotaModel->update($id_anggota, $data);
+        // Handle image upload jika ada
+        $file_image = $this->request->getFile('image_anggota');
+        if ($file_image && $file_image->isValid()) {
+            // Hapus file lama
+            $oldImage = $anggotaData['image_anggota'];
+            if (!empty($oldImage) && file_exists('assets/img/anggota/' . $oldImage)) {
+                unlink('assets/img/anggota/' . $oldImage);
+            }
 
-        session()->setFlashdata('success', 'Data anggota berhasil diperbarui');
-        return redirect()->to(base_url('admin/anggota/index'));
+            // Upload file baru
+            $currentDateTime = date('dmYHis');
+            $newImageName = str_replace(' ', '-', "image_{$nama_perusahaan}_{$currentDateTime}.{$file_image->getExtension()}");
+            $file_image->move('assets/img/anggota', $newImageName);
+            $data['image_anggota'] = $newImageName;
+        }
+
+        if ($this->anggotaModel->update($id_anggota, $data)) {
+            session()->setFlashdata('success', 'Data anggota berhasil diperbarui');
+            return redirect()->to(base_url('admin/anggota'));
+        } else {
+            session()->setFlashdata('error', 'Gagal memperbarui data anggota');
+            return redirect()->back()->withInput();
+        }
     }
 
     public function delete($id)
     {
         if (!session()->get('logged_in')) {
+            if ($this->request->isAJAX()) {
+                return $this->response->setJSON(['success' => false, 'message' => 'Unauthorized']);
+            }
             return redirect()->to(base_url('login'));
         }
 
         $anggotaData = $this->anggotaModel->find($id);
         if (!$anggotaData) {
+            if ($this->request->isAJAX()) {
+                return $this->response->setJSON(['success' => false, 'message' => 'Data anggota tidak ditemukan.']);
+            }
             session()->setFlashdata('error', 'Data anggota tidak ditemukan.');
-            return redirect()->to(base_url('admin/anggota/index'));
+            return redirect()->to(base_url('admin/anggota'));
         }
 
         // Hapus file logo
-        if (!empty($anggotaData['logo_anggota']) && file_exists('assets/img/anggota/' . $anggotaData['logo_anggota'])) {
-            unlink('assets/img/anggota/' . $anggotaData['logo_anggota']);
+        if (!empty($anggotaData['logo_anggota'])) {
+            $logoPath = FCPATH . 'assets/img/anggota/' . $anggotaData['logo_anggota'];
+            if (file_exists($logoPath)) {
+                unlink($logoPath);
+            }
         }
 
-        $this->anggotaModel->delete($id);
+        // Hapus file image
+        if (!empty($anggotaData['image_anggota'])) {
+            $imagePath = FCPATH . 'assets/img/anggota/' . $anggotaData['image_anggota'];
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+        }
 
-        session()->setFlashdata('success', 'Data anggota berhasil dihapus');
-        return redirect()->to(base_url('admin/anggota/index'));
+        if ($this->anggotaModel->delete($id)) {
+            if ($this->request->isAJAX()) {
+                return $this->response->setJSON(['success' => true, 'message' => 'Data anggota berhasil dihapus']);
+            }
+            session()->setFlashdata('success', 'Data anggota berhasil dihapus');
+        } else {
+            if ($this->request->isAJAX()) {
+                return $this->response->setJSON(['success' => false, 'message' => 'Gagal menghapus data anggota']);
+            }
+            session()->setFlashdata('error', 'Gagal menghapus data anggota');
+        }
+        
+        if ($this->request->isAJAX()) {
+            return $this->response->setJSON(['success' => true, 'redirect' => base_url('admin/anggota')]);
+        }
+        
+        return redirect()->to(base_url('admin/anggota'));
     }
 }
