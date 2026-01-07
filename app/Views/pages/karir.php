@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
 
 <!-- HERO SECTION -->
-<section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden text-white" style="background-image: url('<?= base_url('img/foto-hero-section-3.jpg') ?>'); background-size: cover; background-position: center;">
+<section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden text-white" style="background-image: url('<?= base_url('img/slider/foto-hero-section-3.jpg') ?>'); background-size: cover; background-position: center;">
     <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-transparent z-10"></div>
     <div class="absolute -right-20 top-20 w-96 h-96 bg-yellow-500 rounded-full opacity-10 blur-3xl z-0"></div>
 
@@ -82,7 +82,7 @@
                     <a href="<?= base_url($locale . '/karir/detail/' . $job['slug_lowongan_id']) ?>" class="group relative aspect-[3/4] overflow-hidden rounded-lg cursor-pointer shadow-md block">
                         <?php 
                             $poster_url = !empty($job['poster_lowongan']) 
-                                ? base_url('img/' . $job['poster_lowongan']) 
+                                ? base_url('img/lowongan/' . $job['poster_lowongan']) 
                                 : base_url('img/default-job-poster.jpg'); // Fallback image
                         ?>
                         <img src="<?= $poster_url ?>" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="<?= $job['nama_lowongan_id'] ?>">

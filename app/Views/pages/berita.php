@@ -57,7 +57,7 @@
                 
                 <a href="<?= site_url($locale . '/berita/' . ($featured['slug_artikel_id'] ?? '#')) ?>" class="group block bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100">
                     <div class="relative h-64 md:h-96 w-full overflow-hidden">
-                        <img src="<?= base_url('img/' . esc($featured['foto_artikel'])) ?>" 
+                        <img src="<?= base_url('img/artikel/' . esc($featured['foto_artikel'])) ?>" 
                              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
                              alt="<?= esc($featured['alt_artikel_id'] ?? 'Featured Image') ?>">
                     </div>
@@ -100,7 +100,7 @@
                        data-aos="fade-up" data-aos-delay="<?= ($index % 3) * 100 ?>">
                         
                         <div class="relative h-48 overflow-hidden">
-                            <img src="<?= base_url('img/' . esc($item['foto_artikel'])) ?>" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="<?= esc($item['alt_artikel_id']) ?>">
+                            <img src="<?= base_url('img/artikel/' . esc($item['foto_artikel'])) ?>" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="<?= esc($item['alt_artikel_id']) ?>">
                         </div>
                         
                         <div class="p-5 flex flex-col flex-grow">

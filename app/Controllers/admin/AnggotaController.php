@@ -273,7 +273,7 @@ class AnggotaController extends BaseController
 
         if ($this->anggotaModel->update($id_anggota, $data)) {
             session()->setFlashdata('success', 'Data anggota berhasil diperbarui');
-            return redirect()->to(base_url('admin/anggota'));
+            return redirect()->to(base_url('admin/anggota'));   
         } else {
             session()->setFlashdata('error', 'Gagal memperbarui data anggota');
             return redirect()->back()->withInput();

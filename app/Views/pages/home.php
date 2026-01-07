@@ -14,7 +14,7 @@
                         <?php foreach ($slider as $s) : ?>
                             <!-- Dynamic Slide -->
                             <div class="swiper-slide bg-cover bg-center relative"
-                                style="background-image: url('<?= base_url('img/' . $s['foto_slider']); ?>');">
+                                style="background-image: url('<?= base_url('img/slider/' . $s['foto_slider']); ?>');">
                                 <div class="hero-gradient z-0"></div>
                                 <div class="container mx-auto px-6 h-full flex items-center relative z-10">
                                     <div class="max-w-3xl text-white text-left">
@@ -142,7 +142,7 @@
                 <?php if (!empty($commodities)) : ?>
                     <?php foreach ($commodities as $commodity) : ?>
                         <a href="<?= site_url($locale . '/komoditas/' . $commodity['slug_id']) ?>" class="group relative aspect-[3/4] overflow-hidden rounded-lg cursor-pointer shadow-md block">
-                            <img src="<?= base_url('img/' . esc($commodity['foto_komoditas'])) ?>"
+                            <img src="<?= base_url('img/komoditas/' . esc($commodity['foto_komoditas'])) ?>"
                                 alt="<?= esc($commodity['alt_komoditas_id']) ?>"
                                 class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                             <div
@@ -181,7 +181,7 @@
                     <?php foreach ($news as $article) : ?>
                         <div class="bg-white rounded-xl shadow-sm hover:shadow-xl transition-shadow overflow-hidden group h-full flex flex-col">
                             <div class="h-56 overflow-hidden">
-                                <img src="<?= base_url('img/' . esc($article['foto_artikel'])) ?>" alt="<?= esc($article['alt_artikel_id']) ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <img src="<?= base_url('img/artikel/' . esc($article['foto_artikel'])) ?>" alt="<?= esc($article['alt_artikel_id']) ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                             </div>
                             <div class="p-8 flex-1 flex flex-col">
                                 <span class="text-xs text-gray-500 font-bold uppercase tracking-wider mb-2"><?= esc(date('d M Y', strtotime($article['created_at']))) ?></span>
@@ -227,7 +227,7 @@
                                 <!-- Logo Container -->
                                 <div class="w-3/4 h-3/4 flex items-center justify-center relative z-10 p-2">
                                     <?php if (!empty($member['logo_anggota'])) : ?>
-                                        <img src="<?= base_url('img/' . esc($member['logo_anggota'])) ?>" 
+                                        <img src="<?= base_url('img/anggota/' . esc($member['logo_anggota'])) ?>" 
                                              alt="<?= esc($member['nama_perusahaan_anggota']) ?>" 
                                              class="w-full h-full object-contain filter grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110">
                                     <?php else : ?>

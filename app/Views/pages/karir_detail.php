@@ -6,7 +6,7 @@
     // Persiapkan variabel dari controller
     $job_title = $job['nama_lowongan_id'] ?? 'Detail Lowongan';
     $hero_image_url = !empty($job['poster_lowongan']) 
-        ? base_url('img/' . $job['poster_lowongan']) 
+        ? base_url('img/lowongan/' . $job['poster_lowongan']) 
         : base_url('img/default-hero.jpg');
     
     // Deskripsi langsung dari field

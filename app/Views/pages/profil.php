@@ -184,7 +184,7 @@
                 </div>
 
                 <div class="relative w-full shadow-2xl rounded-2xl overflow-hidden border-4 border-white bg-white fade-up delay-100">
-                    <img src="<?= base_url('img/' . ($profil['struktur_organisasi'] ?? 'default-structure.png')) ?>" 
+                    <img src="<?= base_url('img/tentang/' . ($profil['struktur_organisasi'] ?? 'default-structure.png')) ?>" 
                          alt="Struktur Perusahaan" 
                          class="w-full h-auto object-contain">
                 </div>

@@ -23,7 +23,7 @@
     
     // Helper Gambar
     $bg_image = !empty($artikel['foto_artikel']) 
-        ? base_url('img/' . $artikel['foto_artikel']) 
+        ? base_url('img/artikel/' . $artikel['foto_artikel']) 
         : base_url('img/default-news.jpg'); 
 ?>
 
@@ -140,7 +140,7 @@
                             <?php foreach($related_articles as $item): ?>
                             <a href="<?= base_url($locale . '/berita/' . esc($item['slug_artikel_id'] ?? '#')) ?>" class="group flex gap-4 items-start">
                                 <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 relative shadow-sm border border-gray-100">
-                                    <img src="<?= base_url('img/' . esc($item['foto_artikel'] ?? 'default-thumb.jpg')) ?>" 
+                                    <img src="<?= base_url('img/artikel/' . esc($item['foto_artikel'] ?? 'default-thumb.jpg')) ?>" 
                                          class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" 
                                          alt="Thumbnail">
                                 </div>
